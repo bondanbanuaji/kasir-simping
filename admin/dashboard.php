@@ -30,10 +30,19 @@ if ($_SESSION['role'] != 'admin')
     <!-- Sidebar -->
     <div id="sidebar" class="transition-all duration-300 w-64 bg-white shadow-lg flex flex-col p-4 space-y-4"
         style="width: 16rem;">
-        <button onclick="toggleSidebar()" class="self-end text-gray-600 hover:text-blue-600">
-            ☰
-        </button>
+
+        <!-- Toggle Button -->
+        <span onclick="toggleSidebar()"
+            class="cursor-pointer w-10 h-10 flex flex-col justify-center items-center hover:bg-gray-200 rounded transition">
+            <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
+            <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
+            <span class="block w-6 h-0.5 bg-gray-600"></span>
+        </span>
+
+        <!-- Judul Sidebar -->
         <h2 id="sidebar-title" class="text-xl font-bold text-blue-600">Admin Menu</h2>
+
+        <!-- Menu -->
         <nav class="flex flex-col space-y-3">
             <a href="dashboard.php" class="flex items-center space-x-2 text-gray-800 hover:text-blue-600">
                 <span>📊</span> <span class="sidebar-text">Dashboard</span>
@@ -49,6 +58,7 @@ if ($_SESSION['role'] != 'admin')
             </a>
         </nav>
     </div>
+
 
     <!-- Main Content -->
     <main class="flex-1 p-8">
@@ -75,22 +85,8 @@ if ($_SESSION['role'] != 'admin')
             </div>
         </div>
     </main>
-    <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const texts = sidebar.querySelectorAll('.sidebar-text');
-            const title = document.getElementById('sidebar-title');
+    <script src="../assets/js/sidebar.js">
 
-            if (sidebar.style.width === '4rem') {
-                sidebar.style.width = '16rem';
-                title.classList.remove('hidden');
-                texts.forEach(el => el.classList.remove('hidden'));
-            } else {
-                sidebar.style.width = '4rem';
-                title.classList.add('hidden');
-                texts.forEach(el => el.classList.add('hidden'));
-            }
-        }
     </script>
 </body>
 
