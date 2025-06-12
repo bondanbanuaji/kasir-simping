@@ -1,0 +1,10 @@
+  .cursor {
+    display: inline-block;
+    animation: blink 1s step-end infinite;
+    color: #3b82f6; /* Tailwind's blue-500 */
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+  }

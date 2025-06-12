@@ -10,7 +10,7 @@ switch ($_SESSION['role']) {
         header("Location: admin/dashboard.php");
         break;
     case 'kasir':
-        header("Location: kasir/transaksi.php");
+        header("Location: kasir/dashboard.php");
         break;
     case 'pemilik':
         header("Location: pemilik/laporan.php");

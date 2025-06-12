@@ -22,13 +22,16 @@ if ($_SESSION['role'] != 'admin')
             }
         }
     </script>
+    <link rel="stylesheet" href="../assets/css/typingEffect.css">
 </head>
 
 
-<body class="bg-gradient-to-br from-gray-200 via-white to-gray-100 flex min-h-screen">
+<body class="bg-gradient-to-br from-gray-200 via-white to-gray-200 flex min-h-screen">
 
     <!-- Sidebar -->
-    <div id="sidebar" class="transition-all duration-300 w-[13rem] bg-white shadow-lg flex flex-col p-4 space-y-4 bg-gradient-to-br from-gray-200 via-white to-gray-100">
+    <div id="sidebar"
+        class="transition-all duration-300 w-[13rem] bg-white shadow-lg flex flex-col p-4 space-y-4 
+        bg-gradient-to-br from-gray-200 via-white to-gray-200">
 
         <!-- Toggle Button -->
         <span onclick="toggleSidebar()"
@@ -61,32 +64,34 @@ if ($_SESSION['role'] != 'admin')
 
     <!-- Main Content -->
     <main class="flex-1 p-8">
-        <h1 class="text-3xl font-bold mb-4">Selamat Datang, Pak <?= $_SESSION['username'] ?></h1>
-        <p class="text-gray-700">Ini adalah halaman dashboard khusus untuk admin. Dari sini, Anda bisa mengelola user
-            dan produk.</p>
-
+        <h1 id="animated-text" class="text-3xl font-bold mb-4 text-gray-900 whitespace-nowrap">
+            <span id="typed-text"></span><span class="cursor">|</span>
+        </h1>
+        <p class="text-gray-700">
+            Anda sedang berada di dashboard admin. Di sini Anda dapat mengelola data pengguna dan produk toko.
+        </p>
         <!-- Contoh statistik sederhana -->
         <div class="mt-6 grid grid-cols-2 gap-6">
-            <div class="bg-white p-6 rounded shadow">
+            <div class="bg-white p-6 rounded shadow-xl">
                 <h2 class="text-lg font-semibold text-gray-700 mb-2">Total User</h2>
                 <?php
                 require '../includes/db.php';
                 $jumlahUser = $conn->query("SELECT COUNT(*) AS total FROM users")->fetch_assoc()['total'];
                 ?>
-                <p class="text-2xl font-bold text-blue-600"><?= $jumlahUser ?></p>
+                <p class="text-2xl font-bold text-blue-700"><?= $jumlahUser ?></p>
             </div>
-            <div class="bg-white p-6 rounded shadow">
+            <div class="bg-white p-6 rounded shadow-xl">
                 <h2 class="text-lg font-semibold text-gray-700 mb-2">Total Produk</h2>
                 <?php
                 $jumlahProduk = $conn->query("SELECT COUNT(*) AS total FROM produk")->fetch_assoc()['total'];
                 ?>
-                <p class="text-2xl font-bold text-green-600"><?= $jumlahProduk ?></p>
+                <p class="text-2xl font-bold text-blue-700"><?= $jumlahProduk ?></p>
             </div>
         </div>
     </main>
     <script src="../assets/js/sidebar.js">
-
     </script>
+    <script src="../assets/js/adminTypingEffect.js"></script>
 </body>
 
 

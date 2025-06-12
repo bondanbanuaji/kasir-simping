@@ -1,29 +1,33 @@
 <?php
 session_start();
-if ($_SESSION['role'] != 'kasir') header("Location: ../index.php");
+if ($_SESSION['role'] != 'kasir')
+    header("Location: ../index.php");
 require '../includes/db.php';
+date_default_timezone_set('Asia/Jakarta');
 
-$kasir_id = $_SESSION['id'];
+$namas = $_POST['nama'];
+$kasir_id = $_SESSION['user_id'];
 $total = $_POST['total'];
-$tanggal = date("Y-m-d H:i:s");
+$tanggal = date("Y-m-d");
+$jam = date("H:i:s");
 
-$conn->query("INSERT INTO transaksi (kasir_id, tanggal, total) VALUES ('$kasir_id', '$tanggal', '$total')");
+$conn->query("INSERT INTO transaksi (kasir_id, tanggal, jam, total) 
+            VALUES ('$kasir_id', '$tanggal', '$jam', '$total')");
 $transaksi_id = $conn->insert_id;
 
-$produk_id = $_POST['produk_id'];
-$harga = $_POST['harga'];
-$jumlah = $_POST['jumlah'];
+$produk_ids = $_POST['produk_id'];
+$jumlahs = $_POST['jumlah'];
+$hargas = $_POST['harga'];
 
-for ($i = 0; $i < count($produk_id); $i++) {
-  $pid = $produk_id[$i];
-  $qty = $jumlah[$i];
-  $hrg = $harga[$i];
-  $subtotal = $qty * $hrg;
+for ($i = 0; $i < count($produk_ids); $i++) {
+    $produk_id = $produk_ids[$i];
+    $jumlah = $jumlahs[$i];
+    $harga = $hargas[$i];
+    $nama = $namas[$i]; // ambil nama dari form
 
-  $conn->query("INSERT INTO detail_transaksi (transaksi_id, produk_id, jumlah, harga) 
-                VALUES ('$transaksi_id', '$pid', '$qty', '$hrg')");
-
-  $conn->query("UPDATE produk SET stok = stok - $qty WHERE id = $pid");
+    $conn->query("INSERT INTO detail_transaksi (transaksi_id, produk_id, nama, jumlah, harga) 
+                VALUES ('$transaksi_id', '$produk_id', '$nama', '$jumlah', '$harga')");
 }
 
-header("Location: transaksi.php");
+
+header("Location: riwayat.php");
