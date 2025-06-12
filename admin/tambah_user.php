@@ -33,10 +33,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   // Simpan user
   $hashed = md5($password);
-  $conn->query("INSERT INTO users (username, password, role) VALUES ('$username', '$hashed', '$role')");
-  $_SESSION['message'] = ['type' => 'success', 'text' => 'User berhasil ditambahkan'];
-  header("Location: users.php");
-  exit;
+  if ($conn->query("INSERT INTO users (username, password, role) VALUES ('$username', '$hashed', '$role')")) {
+    $_SESSION['message'] = ['type' => 'success', 'text' => 'User berhasil ditambahkan'];
+    header("Location: users.php");
+    exit;
+  } else {
+    $_SESSION['message'] = ['type' => 'error', 'text' => 'Gagal menambahkan user'];
+    header("Location: tambah_user.php");
+    exit;
+  }
 }
 ?>
 

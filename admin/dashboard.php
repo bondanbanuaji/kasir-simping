@@ -25,11 +25,10 @@ if ($_SESSION['role'] != 'admin')
 </head>
 
 
-<body class="flex min-h-screen bg-gray-100">
+<body class="bg-gradient-to-br from-gray-200 via-white to-gray-100 flex min-h-screen">
 
     <!-- Sidebar -->
-    <div id="sidebar" class="transition-all duration-300 w-64 bg-white shadow-lg flex flex-col p-4 space-y-4"
-        style="width: 16rem;">
+    <div id="sidebar" class="transition-all duration-300 w-[13rem] bg-white shadow-lg flex flex-col p-4 space-y-4 bg-gradient-to-br from-gray-200 via-white to-gray-100">
 
         <!-- Toggle Button -->
         <span onclick="toggleSidebar()"
@@ -48,7 +47,7 @@ if ($_SESSION['role'] != 'admin')
                 <span>📊</span> <span class="sidebar-text">Dashboard</span>
             </a>
             <a href="users.php" class="flex items-center space-x-2 text-gray-800 hover:text-blue-600">
-                <span>👤</span> <span class="sidebar-text">Kelola User</span>
+                <span>👤</span> <span class="sidebar-text">Kelola Akun</span>
             </a>
             <a href="produk.php" class="flex items-center space-x-2 text-gray-800 hover:text-blue-600">
                 <span>📦</span> <span class="sidebar-text">Kelola Produk</span>
@@ -62,7 +61,7 @@ if ($_SESSION['role'] != 'admin')
 
     <!-- Main Content -->
     <main class="flex-1 p-8">
-        <h1 class="text-3xl font-bold mb-4">Selamat Datang, Admin <?= $_SESSION['username'] ?></h1>
+        <h1 class="text-3xl font-bold mb-4">Selamat Datang, Pak <?= $_SESSION['username'] ?></h1>
         <p class="text-gray-700">Ini adalah halaman dashboard khusus untuk admin. Dari sini, Anda bisa mengelola user
             dan produk.</p>
 

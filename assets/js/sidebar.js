@@ -5,7 +5,7 @@ function toggleSidebar() {
     const title = document.getElementById('sidebar-title');
 
     if (sidebar.style.width === '4rem') {
-        sidebar.style.width = '16rem';
+        sidebar.style.width = '12rem';
         title.classList.remove('hidden');
         texts.forEach(el => el.classList.remove('hidden'));
     } else {

@@ -3,13 +3,12 @@
 <html lang="id">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Kasir Simping</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Kasir Simping</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      darkMode: 'media',
       theme: {
         extend: {
           animation: {
@@ -32,28 +31,46 @@
   </script>
 </head>
 
-<body class="bg-gradient-to-br from-blue-100 via-white to-pink-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center min-h-screen">
+<body class="bg-gradient-to-br from-blue-100 via-white to-pink-100 flex items-center justify-center min-h-screen">
 
   <form action="proses/login.php" method="POST"
-    class="bg-white dark:bg-gray-800 shadow-xl rounded-2xl px-8 py-10 w-full max-w-sm animate-slideIn">
-    <h1 class="text-3xl font-extrabold text-center mb-6 text-gray-800 dark:text-white">
-      Login Kasir <span class="text-blue-500">Simping</span>
+    class="bg-white shadow-2xl rounded-2xl px-8 py-10 w-full max-w-sm animate-slideIn">
+    <h1 class="text-3xl font-extrabold text-center mb-6 text-gray-800">
+      Web Kasir <span class="text-blue-500">Simping</span>
     </h1>
 
     <?php if (!empty($_SESSION['error'])): ?>
-      <div class="bg-red-100 text-red-700 p-3 rounded mb-4 text-sm animate-fadeIn">
+      <div class="bg-red-100 text-red-700 p-3 rounded mb-4 text-sm animate-fadeIn shadow">
         <?= $_SESSION['error'];
         unset($_SESSION['error']); ?>
       </div>
     <?php endif; ?>
 
-    <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Username</label>
-    <input type="text" name="username" required
-      class="mt-1 mb-4 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none dark:bg-gray-700 dark:text-white dark:border-gray-600">
+    <!-- Username -->
+    <div class="relative z-0 w-full mb-6 group">
+      <input type="text" name="username" id="username" required
+        class="peer block w-full appearance-none rounded-md border border-gray-300 bg-white px-3 pt-5 pb-2.5 text-sm text-gray-900 shadow-sm focus:border-blue-600 focus:outline-none focus:ring-0"
+        placeholder=" " />
+      <label for="username"
+        class="absolute text-sm text-gray-500 duration-300 transform -translate-y-3.5 scale-75 top-0 left-3 z-10 origin-[0] px-1 bg-white shadow-sm
+               peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-3
+               peer-placeholder-shown:text-base peer-focus:scale-75 peer-focus:-translate-y-3.5">
+        Masukkan Username
+      </label>
+    </div>
 
-    <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Password</label>
-    <input type="password" name="password" required
-      class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none dark:bg-gray-700 dark:text-white dark:border-gray-600">
+    <!-- Password -->
+    <div class="relative z-0 w-full mb-6 group">
+      <input type="password" name="password" id="password" required
+        class="peer block w-full appearance-none rounded-md border border-gray-300 bg-white px-3 pt-5 pb-2.5 text-sm text-gray-900 shadow-sm focus:border-blue-600 focus:outline-none focus:ring-0"
+        placeholder=" " />
+      <label for="password"
+        class="absolute text-sm text-gray-500 duration-300 transform -translate-y-3.5 scale-75 top-0 left-3 z-10 origin-[0] px-1 bg-white shadow-sm
+               peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-3
+               peer-placeholder-shown:text-base peer-focus:scale-75 peer-focus:-translate-y-3.5">
+        Masukkan Password
+      </label>
+    </div>
 
     <button type="submit"
       class="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-semibold shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1">

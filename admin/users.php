@@ -25,11 +25,10 @@ require '../includes/db.php';
     </script>
 </head>
 
-<body class="flex min-h-screen bg-gray-100">
+<body class="bg-gradient-to-br from-gray-200 via-white to-gray-100 flex min-h-screen">
 
     <!-- Sidebar -->
-    <div id="sidebar" class="transition-all duration-300 w-64 bg-white shadow-lg flex flex-col p-4 space-y-4"
-        style="width: 16rem;">
+    <div id="sidebar" class="transition-all duration-300 w-[13rem] bg-white shadow-lg flex flex-col p-4 space-y-4 bg-gradient-to-br from-gray-200 via-white to-gray-100">
 
         <!-- Toggle Button -->
         <span onclick="toggleSidebar()"
@@ -48,7 +47,7 @@ require '../includes/db.php';
                 <span>📊</span> <span class="sidebar-text">Dashboard</span>
             </a>
             <a href="users.php" class="flex items-center space-x-2 text-gray-800 hover:text-blue-600">
-                <span>👤</span> <span class="sidebar-text">Kelola User</span>
+                <span>👤</span> <span class="sidebar-text">Kelola Akun</span>
             </a>
             <a href="produk.php" class="flex items-center space-x-2 text-gray-800 hover:text-blue-600">
                 <span>📦</span> <span class="sidebar-text">Kelola Produk</span>
@@ -62,9 +61,17 @@ require '../includes/db.php';
 
     <!-- Content -->
     <main class="flex-1 p-8">
-        <h1 class="text-2xl font-bold mb-4">Manajemen User</h1>
-        <a href="tambah_user.php" class="bg-green-500 text-white px-4 py-2 rounded mb-4 inline-block">+ Tambah User</a>
-
+        <h1 class="text-2xl font-bold mb-4">Manajemen Akun</h1>
+        <a href="tambah_user.php" class="bg-green-500 text-white px-4 py-2 rounded mb-4 inline-block">+ Tambah Akun</a>
+        <?php if (isset($_SESSION['message'])): ?>
+            <?php $msg = $_SESSION['message'];
+            unset($_SESSION['message']); ?>
+            <div
+                class="mb-4 p-3 rounded text-sm font-medium 
+        <?= $msg['type'] === 'success' ? 'bg-green-100 text-green-700 border border-green-300' : 'bg-red-100 text-red-700 border border-red-300' ?>">
+                <?= $msg['text'] ?>
+            </div>
+        <?php endif; ?>
         <table class="w-full table-auto border border-collapse bg-white">
             <thead class="bg-gray-200">
                 <tr>
