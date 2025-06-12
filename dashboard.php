@@ -13,7 +13,7 @@ switch ($_SESSION['role']) {
         header("Location: kasir/dashboard.php");
         break;
     case 'pemilik':
-        header("Location: pemilik/laporan.php");
+        header("Location: pemilik/dashboard.php");
         break;
     default:
         echo "Role tidak dikenal.";
