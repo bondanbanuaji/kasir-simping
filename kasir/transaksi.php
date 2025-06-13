@@ -58,17 +58,17 @@ $produk = $conn->query("SELECT * FROM produk");
         </span>
 
         <!-- Judul Sidebar -->
-        <h2 id="sidebar-title" class="text-xl font-bold text-green-600">Kasir Menu</h2>
+        <h2 id="sidebar-title" class="text-xl font-bold text-purple-600">Kasir Menu</h2>
 
         <!-- Menu -->
         <nav class="flex flex-col space-y-3">
-            <a href="dashboard.php" class="flex items-center space-x-2 text-gray-800 hover:text-green-600">
+            <a href="dashboard.php" class="flex items-center space-x-2 text-gray-800 hover:text-purple-600">
                 <span>📊</span> <span class="sidebar-text">Dashboard</span>
             </a>
-            <a href="transaksi.php" class="flex items-center space-x-2 text-gray-800 hover:text-green-600">
+            <a href="transaksi.php" class="flex items-center space-x-2 text-gray-800 hover:text-purple-600">
                 <span>💵</span> <span class="sidebar-text">Transaksi</span>
             </a>
-            <a href="riwayat.php" class="flex items-center space-x-2 text-gray-800 hover:text-green-600">
+            <a href="riwayat.php" class="flex items-center space-x-2 text-gray-800 hover:text-purple-600">
                 <span>⏲️</span> <span class="sidebar-text">Riwayat </span>
             </a>
             <a href="../proses/logout.php" class="flex items-center space-x-2 text-red-600 mt-4">
@@ -113,7 +113,7 @@ $produk = $conn->query("SELECT * FROM produk");
                 <input type="text" id="total" name="total" value="0" readonly class="border p-2">
             </div>
 
-            <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded">Simpan Transaksi</button>
+            <button type="submit" class="bg-purple-500 text-white px-6 py-2 rounded">Simpan Transaksi</button>
         </form>
     </div>
 </body>

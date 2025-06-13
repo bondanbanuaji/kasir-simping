@@ -25,8 +25,12 @@ for ($i = 0; $i < count($produk_ids); $i++) {
     $harga = $hargas[$i];
     $nama = $namas[$i]; // ambil nama dari form
 
+    // Simpan detail transaksi
     $conn->query("INSERT INTO detail_transaksi (transaksi_id, produk_id, nama, jumlah, harga) 
                 VALUES ('$transaksi_id', '$produk_id', '$nama', '$jumlah', '$harga')");
+
+    // 🔽 Kurangi stok produk di tabel produk
+    $conn->query("UPDATE produk SET stok = stok - $jumlah WHERE id = '$produk_id'");
 }
 
 

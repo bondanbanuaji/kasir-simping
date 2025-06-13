@@ -35,7 +35,7 @@ $result = mysqli_query($conn, $query);
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100 flex">
+<body class="bg-gradient-to-br from-gray-200 via-white to-gray-200 flex min-h-screen">
 
     <!-- Sidebar -->
     <div id="sidebar"
@@ -57,7 +57,7 @@ $result = mysqli_query($conn, $query);
             <a href="laporan.php" class="flex items-center space-x-2 text-gray-800 hover:text-green-600">
                 <span>📄</span> <span class="sidebar-text">Laporan</span>
             </a>
-            <a href="../logout.php" class="flex items-center space-x-2 text-red-600 mt-4">
+            <a href="../proses/logout.php" class="flex items-center space-x-2 text-red-600 mt-4">
                 <span>🚪</span> <span class="sidebar-text">Logout</span>
             </a>
         </nav>

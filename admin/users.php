@@ -94,7 +94,7 @@ require '../includes/db.php';
                         <td class="border p-2 space-x-2">
                             <a href="edit_user.php?id=<?= $row['id'] ?>" class="text-blue-600">Edit</a>
                             <a href="hapus_user.php?id=<?= $row['id'] ?>" class="text-red-600"
-                                onclick="return confirm('Yakin hapus user ini?')">Hapus</a>
+                                onclick="return confirm('Yakin hapus akun ini?')">Hapus</a>
                         </td>
                     </tr>
                 <?php endwhile; ?>

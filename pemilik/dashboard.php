@@ -30,10 +30,11 @@ $total_pemasukan = mysqli_fetch_assoc($result3)['total'] ?? 0;
     <title>Dashboard Pemilik</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 flex">
+<body class="bg-gradient-to-br from-gray-200 via-white to-gray-200 flex min-h-screen">
 
     <!-- Sidebar -->
-    <div id="sidebar" class="transition-all duration-300 w-[13rem] bg-white shadow-lg flex flex-col p-4 space-y-4 bg-gradient-to-br from-gray-200 via-white to-gray-200">
+    <div id="sidebar" class="transition-all duration-300 w-[13rem] bg-white shadow-lg flex flex-col p-4 space-y-4 
+        bg-gradient-to-br from-gray-200 via-white to-gray-200">
         <!-- Toggle Button -->
         <span onclick="toggleSidebar()" class="cursor-pointer w-10 h-10 flex flex-col justify-center items-center hover:bg-gray-200 rounded transition">
             <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
@@ -52,7 +53,7 @@ $total_pemasukan = mysqli_fetch_assoc($result3)['total'] ?? 0;
             <a href="laporan.php" class="flex items-center space-x-2 text-gray-800 hover:text-green-600">
                 <span>📄</span> <span class="sidebar-text">Laporan</span>
             </a>
-            <a href="../logout.php" class="flex items-center space-x-2 text-red-600 mt-4">
+            <a href="../proses/logout.php" class="flex items-center space-x-2 text-red-600 mt-4">
                 <span>🚪</span> <span class="sidebar-text">Logout</span>
             </a>
         </nav>

@@ -33,15 +33,15 @@ $riwayat = $conn->query("
             <span class="block w-6 h-0.5 bg-gray-600"></span>
         </span>
 
-        <h2 class="text-xl font-bold text-green-600">Kasir Menu</h2>
+        <h2 class="text-xl font-bold text-purple-600">Kasir Menu</h2>
         <nav class="flex flex-col space-y-3">
-            <a href="dashboard.php" class="flex items-center space-x-2 text-gray-800 hover:text-green-600">
+            <a href="dashboard.php" class="flex items-center space-x-2 text-gray-800 hover:text-purple-600">
                 <span>📊</span> <span class="sidebar-text">Dashboard</span>
             </a>
-            <a href="transaksi.php" class="flex items-center space-x-2 text-gray-800 hover:text-green-600">
+            <a href="transaksi.php" class="flex items-center space-x-2 text-gray-800 hover:text-purple-600">
                 <span>💵</span> <span class="sidebar-text">Transaksi</span>
             </a>
-            <a href="riwayat.php" class="flex items-center space-x-2 text-gray-800 hover:text-green-600">
+            <a href="riwayat.php" class="flex items-center space-x-2 text-gray-800 hover:text-purple-600">
                 <span>⏲️</span> <span class="sidebar-text">Riwayat Transaksi</span>
             </a>
             <a href="../proses/logout.php" class="flex items-center space-x-2 text-red-600 mt-4">
@@ -57,7 +57,7 @@ $riwayat = $conn->query("
         <div class="overflow-x-auto bg-white shadow-xl rounded p-4">
             <table class="w-full table-auto">
                 <thead>
-    <tr class="bg-green-100 text-left">
+    <tr class="bg-purple-100 text-left">
         <th class="border p-2">ID</th>
         <th class="border p-2">Nama Produk</th>
         <th class="border p-2">Tanggal</th>
