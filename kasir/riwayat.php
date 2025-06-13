@@ -57,40 +57,44 @@ $riwayat = $conn->query("
         <div class="overflow-x-auto bg-white shadow-xl rounded p-4">
             <table class="w-full table-auto">
                 <thead>
-    <tr class="bg-purple-100 text-left">
-        <th class="border p-2">ID</th>
-        <th class="border p-2">Nama Produk</th>
-        <th class="border p-2">Tanggal</th>
-        <th class="border p-2">Jam</th>
-        <th class="border p-2">Total</th>
-        <th class="border p-2">Kasir</th> <!-- Tambahan -->
-    </tr>
-</thead>
-<tbody>
-    <?php while ($t = $riwayat->fetch_assoc()): 
-    $transaksi_id = $t['id'];
-    $produk = $conn->query("SELECT nama FROM detail_transaksi WHERE transaksi_id = $transaksi_id");
-    $nama_produk = [];
-    while ($p = $produk->fetch_assoc()) {
-        $nama_produk[] = $p['nama'];
-    }
-?>
-<tr>
-    <td class="border p-2"><?= $t['id'] ?></td>
-    <td class="border p-2"><?= implode(', ', $nama_produk) ?></td>
-    <td class="border p-2"><?= $t['tanggal'] ?></td>
-    <td class="border p-2"><?= $t['jam'] ?></td>
-    <td class="border p-2">Rp<?= number_format($t['total'], 0, ',', '.') ?></td>
-    <td class="border p-2"><?= $t['username'] ?></td>
-</tr>
-<?php endwhile; ?>
+                    <tr class="bg-purple-100 text-left border">
+                        <th class="border p-2">ID</th>
+                        <th class="border p-2">Nama Produk</th>
+                        <th class="border p-2">Tanggal</th>
+                        <th class="border p-2">Jam</th>
+                        <th class="border p-2">Total</th>
+                        <th class="border p-2">Kasir</th>
+                        <th class="border p-2">Stok yang Dibeli</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($t = $riwayat->fetch_assoc()): 
+                        $transaksi_id = $t['id'];
+                        $produk = $conn->query("SELECT nama, jumlah FROM detail_transaksi WHERE transaksi_id = $transaksi_id");
+                        $nama_produk = [];
+                        $stok_dibeli = [];
+                        while ($p = $produk->fetch_assoc()) {
+                            $nama_produk[] = $p['nama'];
+                            $stok_dibeli[] = $p['jumlah'];
+                        }
+                    ?>
+                    <tr>
+                        <td class="border p-2"><?= $t['id'] ?></td>
+                        <td class="border p-2"><?= implode(', ', $nama_produk) ?></td>
+                        <td class="border p-2"><?= $t['tanggal'] ?></td>
+                        <td class="border p-2"><?= $t['jam'] ?></td>
+                        <td class="border p-2">Rp<?= number_format($t['total'], 0, ',', '.') ?></td>
+                        <td class="border p-2"><?= $t['username'] ?></td>
+                        <td class="border p-2"><?= implode(', ', $stok_dibeli) ?></td>
+                    </tr>
+                    <?php endwhile; ?>
 
-    <?php if ($riwayat->num_rows == 0): ?>
-        <tr>
-            <td colspan="4" class="px-4 py-2 text-center text-gray-500">Belum ada transaksi.</td>
-        </tr>
-    <?php endif; ?>
-</tbody>
+                    <?php if ($riwayat->num_rows == 0): ?>
+                        <tr>
+                            <td colspan="7" class="px-4 py-2 text-center text-gray-500">Belum ada transaksi.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
             </table>
         </div>
     </main>

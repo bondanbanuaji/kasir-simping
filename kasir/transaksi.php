@@ -69,7 +69,7 @@ $produk = $conn->query("SELECT * FROM produk");
                 <span>💵</span> <span class="sidebar-text">Transaksi</span>
             </a>
             <a href="riwayat.php" class="flex items-center space-x-2 text-gray-800 hover:text-purple-600">
-                <span>⏲️</span> <span class="sidebar-text">Riwayat </span>
+                <span>⏲️</span> <span class="sidebar-text">Riwayat Transaksi</span>
             </a>
             <a href="../proses/logout.php" class="flex items-center space-x-2 text-red-600 mt-4">
                 <span>🚪</span> <span class="sidebar-text">Logout</span>
@@ -79,7 +79,7 @@ $produk = $conn->query("SELECT * FROM produk");
 
     <!-- KONTEN -->
     <div class="flex-1 p-6">
-        <h1 class="text-2xl font-bold mb-4">Transaksi Baru</h1>
+        <h1 class="text-2xl font-bold mb-4">Simpan Transaksi </h1>
 
         <form action="simpan_transaksi.php" method="POST">
             <div class="mb-4 flex flex-wrap gap-4">
@@ -92,7 +92,7 @@ $produk = $conn->query("SELECT * FROM produk");
                     <?php endwhile; ?>
                 </select>
                 <input type="number" id="jumlah" placeholder="Jumlah" class="border p-2" min="1" required>
-                <button type="button" onclick="tambahProduk()" class="bg-blue-500 text-white px-4 py-2 rounded">+
+                <button type="button" onclick="tambahProduk()" class="bg-purple-500 text-white px-4 py-2 rounded">+
                     Tambah</button>
             </div>
 
