@@ -31,9 +31,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       exit;
     }
 
-    $hashed = md5($password);
-    $conn->query("UPDATE users SET username='$username', password='$hashed', role='$role' WHERE id=$id");
+    // Update dengan password baru (tanpa hash)
+    $conn->query("UPDATE users SET username='$username', password='$password', role='$role' WHERE id=$id");
   } else {
+    // Update tanpa mengubah password
     $conn->query("UPDATE users SET username='$username', role='$role' WHERE id=$id");
   }
 

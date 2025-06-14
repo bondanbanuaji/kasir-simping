@@ -9,21 +9,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $confirm = $_POST['confirm_password'];
   $role = $_POST['role'];
 
-  // Validasi panjang password
   if (strlen($password) < 6) {
     $_SESSION['message'] = ['type' => 'error', 'text' => 'Password minimal 6 karakter'];
     header("Location: tambah_user.php");
     exit;
   }
 
-  // Validasi konfirmasi password
   if ($password !== $confirm) {
     $_SESSION['message'] = ['type' => 'error', 'text' => 'Password tidak cocok'];
     header("Location: tambah_user.php");
     exit;
   }
 
-  // Cek username sudah ada atau belum
   $cek = $conn->query("SELECT * FROM users WHERE username='$username'");
   if ($cek->num_rows > 0) {
     $_SESSION['message'] = ['type' => 'error', 'text' => 'Username sudah digunakan'];
@@ -31,9 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     exit;
   }
 
-  // Simpan user
-  $hashed = md5($password);
-  if ($conn->query("INSERT INTO users (username, password, role) VALUES ('$username', '$hashed', '$role')")) {
+  // Tanpa hash
+  if ($conn->query("INSERT INTO users (username, password, role) VALUES ('$username', '$password', '$role')")) {
     $_SESSION['message'] = ['type' => 'success', 'text' => 'Akun berhasil ditambahkan'];
     header("Location: users.php");
     exit;
@@ -95,5 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Simpan</button>
     </div>
   </form>
+
+  <script src="../assets/js/sidebar.js"></script>
 </body>
 </html>

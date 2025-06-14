@@ -1,19 +1,30 @@
 <?php
 session_start();
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'kasir') {
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'kasir') {
     header("Location: ../index.php");
     exit;
 }
+
 require '../includes/db.php';
 
-$kasir_id = (int) $_SESSION['user_id'];
-$riwayat = $conn->query("
-    SELECT transaksi.*, users.username 
-    FROM transaksi 
-    JOIN users ON transaksi.kasir_id = users.id 
-    WHERE transaksi.kasir_id = $kasir_id 
-    ORDER BY transaksi.tanggal DESC
-");
+$kasir_id = $_SESSION['user_id'];
+
+// Ambil data transaksi oleh kasir
+$query = "
+    SELECT 
+        transaksi.id_transaksi AS transaksi_id,
+        transaksi.tgl_transaksi,
+        transaksi.no_invoice,
+        transaksi.total,
+        transaksi.metode_pembayaran,
+        users.username
+    FROM transaksi
+    JOIN users ON transaksi.kasir_id = users.id
+    WHERE transaksi.kasir_id = $kasir_id
+    ORDER BY transaksi.tgl_transaksi DESC
+";
+
+$result = $conn->query($query);
 ?>
 
 <!DOCTYPE html>
@@ -25,6 +36,7 @@ $riwayat = $conn->query("
     <link rel="stylesheet" href="../assets/css/typingEffect.css">
 </head>
 <body class="bg-gradient-to-br from-gray-200 via-white to-gray-200 flex min-h-screen">
+
     <!-- Sidebar -->
     <div id="sidebar" class="transition-all duration-300 w-[13rem] bg-white shadow-lg flex flex-col p-4 space-y-4">
         <span onclick="toggleSidebar()" class="cursor-pointer w-10 h-10 flex flex-col justify-center items-center hover:bg-gray-200 rounded transition">
@@ -41,7 +53,7 @@ $riwayat = $conn->query("
             <a href="transaksi.php" class="flex items-center space-x-2 text-gray-800 hover:text-purple-600">
                 <span>💵</span> <span class="sidebar-text">Transaksi</span>
             </a>
-            <a href="riwayat.php" class="flex items-center space-x-2 text-gray-800 hover:text-purple-600">
+            <a href="riwayat.php" class="flex items-center space-x-2 text-purple-600 font-bold">
                 <span>⏲️</span> <span class="sidebar-text">Riwayat Transaksi</span>
             </a>
             <a href="../proses/logout.php" class="flex items-center space-x-2 text-red-600 mt-4">
@@ -59,37 +71,43 @@ $riwayat = $conn->query("
                 <thead>
                     <tr class="bg-purple-100 text-left border">
                         <th class="border p-2">ID</th>
-                        <th class="border p-2">Nama Produk</th>
+                        <th class="border p-2">No. Invoice</th>
+                        <th class="border p-2">Produk</th>
                         <th class="border p-2">Tanggal</th>
-                        <th class="border p-2">Jam</th>
                         <th class="border p-2">Total</th>
                         <th class="border p-2">Kasir</th>
-                        <th class="border p-2">Stok yang Dibeli</th>
+                        <th class="border p-2">Qty</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php while ($t = $riwayat->fetch_assoc()): 
-                        $transaksi_id = $t['id'];
-                        $produk = $conn->query("SELECT nama, jumlah FROM detail_transaksi WHERE transaksi_id = $transaksi_id");
-                        $nama_produk = [];
-                        $stok_dibeli = [];
-                        while ($p = $produk->fetch_assoc()) {
-                            $nama_produk[] = $p['nama'];
-                            $stok_dibeli[] = $p['jumlah'];
-                        }
-                    ?>
-                    <tr>
-                        <td class="border p-2"><?= $t['id'] ?></td>
-                        <td class="border p-2"><?= implode(', ', $nama_produk) ?></td>
-                        <td class="border p-2"><?= $t['tanggal'] ?></td>
-                        <td class="border p-2"><?= $t['jam'] ?></td>
-                        <td class="border p-2">Rp<?= number_format($t['total'], 0, ',', '.') ?></td>
-                        <td class="border p-2"><?= $t['username'] ?></td>
-                        <td class="border p-2"><?= implode(', ', $stok_dibeli) ?></td>
-                    </tr>
-                    <?php endwhile; ?>
+                    <?php if ($result && $result->num_rows > 0): ?>
+                        <?php while ($t = $result->fetch_assoc()): 
+                            $transaksi_id = $t['transaksi_id'];
+                            $produk = $conn->query("
+                                SELECT produk.nama, detail_transaksi.jumlah 
+                                FROM detail_transaksi 
+                                JOIN produk ON detail_transaksi.produk_id = produk.id 
+                                WHERE detail_transaksi.transaksi_id = $transaksi_id
+                            ");
 
-                    <?php if ($riwayat->num_rows == 0): ?>
+                            $nama_produk = [];
+                            $stok_dibeli = [];
+                            while ($p = $produk->fetch_assoc()) {
+                                $nama_produk[] = $p['nama'];
+                                $stok_dibeli[] = $p['jumlah'];
+                            }
+                        ?>
+                        <tr>
+                            <td class="border p-2"><?= $t['transaksi_id'] ?></td>
+                            <td class="border p-2"><?= $t['no_invoice'] ?></td>
+                            <td class="border p-2"><?= implode(', ', $nama_produk) ?></td>
+                            <td class="border p-2"><?= $t['tgl_transaksi'] ?></td>
+                            <td class="border p-2">Rp<?= number_format($t['total'], 0, ',', '.') ?></td>
+                            <td class="border p-2"><?= $t['username'] ?></td>
+                            <td class="border p-2"><?= implode(', ', $stok_dibeli) ?></td>
+                        </tr>
+                        <?php endwhile; ?>
+                    <?php else: ?>
                         <tr>
                             <td colspan="7" class="px-4 py-2 text-center text-gray-500">Belum ada transaksi.</td>
                         </tr>

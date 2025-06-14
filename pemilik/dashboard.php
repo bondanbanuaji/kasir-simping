@@ -12,17 +12,16 @@ $queryTransaksi = "SELECT COUNT(*) AS total FROM transaksi";
 $result1 = mysqli_query($conn, $queryTransaksi);
 $total_transaksi = mysqli_fetch_assoc($result1)['total'] ?? 0;
 
-// Hitung Total Produk Terjual (JOIN dengan produk untuk validasi stok bila perlu)
+// Hitung Total Produk Terjual
 $queryProdukTerjual = "SELECT SUM(jumlah) AS total FROM detail_transaksi";
 $result2 = mysqli_query($conn, $queryProdukTerjual);
 $total_produk = mysqli_fetch_assoc($result2)['total'] ?? 0;
 
-// Hitung Total Pemasukan
-$queryPemasukan = "SELECT SUM(jumlah * harga) AS total FROM detail_transaksi";
+// Hitung Total Pemasukan (pakai kolom 'total' yang sudah disediakan di tabel)
+$queryPemasukan = "SELECT SUM(total) AS total FROM detail_transaksi";
 $result3 = mysqli_query($conn, $queryPemasukan);
 $total_pemasukan = mysqli_fetch_assoc($result3)['total'] ?? 0;
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -61,7 +60,9 @@ $total_pemasukan = mysqli_fetch_assoc($result3)['total'] ?? 0;
 
     <!-- Konten Utama -->
     <div class="flex-1 p-6">
-        <h1 class="text-2xl font-bold mb-6">Dashboard Pemilik</h1>
+        <h1 id="animated-text" class="text-3xl font-bold mb-4 text-gray-900 whitespace-nowrap">
+            <span id="typed-text"></span><span class="cursor text-green-600">|</span>
+        </h1> 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="bg-white rounded-xl shadow-md p-4">
                 <p class="text-gray-600">Total Transaksi</p>
@@ -73,17 +74,12 @@ $total_pemasukan = mysqli_fetch_assoc($result3)['total'] ?? 0;
             </div>
             <div class="bg-white rounded-xl shadow-md p-4">
                 <p class="text-gray-600">Total Pemasukan</p>
-                <p class="text-2xl font-bold text-green-600">Rp <?= number_format($total_pemasukan,0,",",".") ?></p>
+                <p class="text-2xl font-bold text-green-600">Rp <?= number_format($total_pemasukan, 0, ",", ".") ?></p>
             </div>
         </div>
     </div>
 
-    <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById("sidebar");
-            sidebar.classList.toggle("w-[13rem]");
-            sidebar.classList.toggle("w-0");
-        }
-    </script>
+    <script src="../assets/js/sidebar.js"></script>
+    <script src="../assets/js/pemilikTypingEffect.js"></script>
 </body>
 </html>

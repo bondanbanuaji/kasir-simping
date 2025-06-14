@@ -7,34 +7,32 @@ if ($_SESSION['role'] != 'pemilik') {
 
 include '../proses/connect.php';
 
-// Ambil data transaksi lengkap dari tabel relasi
 $query = "
-    SELECT 
-        t.id AS transaksi_id,
-        t.tanggal,
-        t.jam,
-        t.nama AS nama_pembeli,
-        u.username AS kasir,
-        SUM(dt.jumlah * dt.harga) AS total
-    FROM transaksi t
-    JOIN detail_transaksi dt ON dt.transaksi_id = t.id
-    JOIN users u ON u.id = t.kasir_id
-    GROUP BY t.id, t.tanggal, t.jam, u.username
-    ORDER BY t.tanggal DESC, t.jam DESC
+SELECT 
+    t.no_invoice,
+    t.tgl_transaksi,
+    GROUP_CONCAT(CONCAT(p.nama, ' (', dt.jumlah, 'x)') SEPARATOR ', ') AS daftar_produk,
+    t.total,
+    t.metode_pembayaran,
+    u.username AS nama_kasir
+FROM transaksi t
+JOIN detail_transaksi dt ON dt.transaksi_id = t.id_transaksi
+JOIN produk p ON dt.produk_id = p.id
+JOIN users u ON t.kasir_id = u.id
+GROUP BY t.id_transaksi, t.no_invoice, t.tgl_transaksi, t.total, t.metode_pembayaran, u.username
+ORDER BY t.tgl_transaksi DESC
 ";
+
 $result = mysqli_query($conn, $query);
 ?>
 
-
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
     <title>Laporan Transaksi</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-
 <body class="bg-gradient-to-br from-gray-200 via-white to-gray-200 flex min-h-screen">
 
     <!-- Sidebar -->
@@ -75,29 +73,36 @@ $result = mysqli_query($conn, $query);
             <table class="w-full table-auto">
                 <thead class="bg-gray-100 text-gray-700">
                     <tr>
-                        <th class="px-4 py-2 text-left">ID Transaksi</th>
+                        <th class="px-4 py-2 text-left">Invoice</th>
                         <th class="px-4 py-2 text-left">Tanggal</th>
                         <th class="px-4 py-2 text-left">Jam</th>
                         <th class="px-4 py-2 text-left">Kasir</th>
-                        <th class="px-4 py-2 text-left">Pembeli</th>
+                        <th class="px-4 py-2 text-left">Produk</th>
+                        <th class="px-4 py-2 text-left">Metode</th>
                         <th class="px-4 py-2 text-left">Total</th>
                     </tr>
                 </thead>
                 <tbody class="text-gray-800">
                     <?php if (mysqli_num_rows($result) > 0): ?>
                         <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                            <?php
+                                $tanggal_waktu = date_create($row['tgl_transaksi']);
+                                $tanggal = date_format($tanggal_waktu, 'Y-m-d');
+                                $jam = date_format($tanggal_waktu, 'H:i:s');
+                            ?>
                             <tr class="border-b">
-                                <td class="px-4 py-2"><?= $row['transaksi_id'] ?></td>
-                                <td class="px-4 py-2"><?= $row['tanggal'] ?></td>
-                                <td class="px-4 py-2"><?= $row['jam'] ?></td>
-                                <td class="px-4 py-2"><?= $row['kasir'] ?></td>
-                                <td class="px-4 py-2"><?= $row['nama_pembeli'] ?></td>
+                                <td class="px-4 py-2"><?= $row['no_invoice'] ?></td>
+                                <td class="px-4 py-2"><?= $tanggal ?></td>
+                                <td class="px-4 py-2"><?= $jam ?></td>
+                                <td class="px-4 py-2"><?= $row['nama_kasir'] ?></td>
+                                <td class="px-4 py-2"><?= $row['daftar_produk'] ?></td>
+                                <td class="px-4 py-2"><?= $row['metode_pembayaran'] ?></td>
                                 <td class="px-4 py-2">Rp <?= number_format($row['total'], 0, ',', '.') ?></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="6" class="text-center py-4 text-gray-500">Tidak ada data transaksi.</td>
+                            <td colspan="7" class="text-center py-4 text-gray-500">Tidak ada data transaksi.</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -105,13 +110,6 @@ $result = mysqli_query($conn, $query);
         </div>
     </div>
 
-    <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById("sidebar");
-            sidebar.classList.toggle("w-[13rem]");
-            sidebar.classList.toggle("w-0");
-        }
-    </script>
+        <script src="../assets/js/sidebar.js"></script>
 </body>
-
 </html>

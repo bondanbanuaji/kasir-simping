@@ -3,7 +3,7 @@ session_start();
 require '../includes/db.php';
 
 $username = $_POST['username'];
-$password = md5($_POST['password']);
+$password = $_POST['password']; // tidak pakai md5 / hash
 
 $sql = "SELECT * FROM users WHERE username='$username' AND password='$password'";
 $result = $conn->query($sql);

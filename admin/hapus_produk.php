@@ -16,15 +16,24 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 $id = (int) $_GET['id'];
 
 // Cek apakah produk ada
-$produk = $conn->query("SELECT * FROM produk WHERE id=$id")->fetch_assoc();
+$stmt = $conn->prepare("SELECT * FROM produk WHERE id = ?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$produk = $stmt->get_result()->fetch_assoc();
+$stmt->close();
+
 if (!$produk) {
   $_SESSION['message'] = "Produk tidak ditemukan.";
   header("Location: produk.php");
   exit;
 }
 
-// Hapus
-$hapus = $conn->query("DELETE FROM produk WHERE id=$id");
+// Hapus menggunakan prepared statement
+$stmt = $conn->prepare("DELETE FROM produk WHERE id = ?");
+$stmt->bind_param("i", $id);
+$hapus = $stmt->execute();
+$stmt->close();
+
 if ($hapus) {
   $_SESSION['message'] = "Produk berhasil dihapus.";
 } else {

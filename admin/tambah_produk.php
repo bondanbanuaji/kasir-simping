@@ -2,6 +2,7 @@
 session_start();
 if ($_SESSION['role'] != 'admin')
   header("Location: ../index.php");
+
 require '../includes/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -9,7 +10,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $harga = (int) $_POST['harga'];
   $stok = (int) $_POST['stok'];
 
-  $simpan = $conn->query("INSERT INTO produk (nama, harga, stok) VALUES ('$nama', $harga, $stok)");
+  // Insert using prepared statement
+  $stmt = $conn->prepare("INSERT INTO produk (nama, harga, stok) VALUES (?, ?, ?)");
+  $stmt->bind_param("sii", $nama, $harga, $stok);
+  $simpan = $stmt->execute();
+  $stmt->close();
 
   if ($simpan) {
     $_SESSION['message'] = "Produk berhasil ditambahkan!";
@@ -31,7 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
-
   <div class="bg-white shadow-md rounded p-8 w-full max-w-md">
     <h1 class="text-2xl font-bold mb-6 text-center text-blue-600">Tambah Produk</h1>
 
@@ -70,6 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </form>
   </div>
 
+  <script src="../assets/js/sidebar.js"></script>
 </body>
 
 </html>

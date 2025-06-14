@@ -1,7 +1,9 @@
 <?php
 session_start();
-if ($_SESSION['role'] != 'admin')
+if ($_SESSION['role'] != 'admin') {
     header("Location: ../index.php");
+    exit();
+}
 require '../includes/db.php';
 ?>
 
@@ -31,8 +33,7 @@ require '../includes/db.php';
     <div id="sidebar" class="transition-all duration-300 w-[13rem] bg-white shadow-lg flex flex-col p-4 space-y-4 bg-gradient-to-br from-gray-200 via-white to-gray-100">
 
         <!-- Toggle Button -->
-        <span onclick="toggleSidebar()"
-            class="cursor-pointer w-10 h-10 flex flex-col justify-center items-center hover:bg-gray-200 rounded transition">
+        <span onclick="toggleSidebar()" class="cursor-pointer w-10 h-10 flex flex-col justify-center items-center hover:bg-gray-200 rounded transition">
             <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
             <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
             <span class="block w-6 h-0.5 bg-gray-600"></span>
@@ -63,15 +64,15 @@ require '../includes/db.php';
     <main class="flex-1 p-8">
         <h1 class="text-2xl font-bold mb-4">Manajemen Akun</h1>
         <a href="tambah_user.php" class="bg-green-500 text-white px-4 py-2 rounded mb-4 inline-block">+ Tambah Akun</a>
+
         <?php if (isset($_SESSION['message'])): ?>
-            <?php $msg = $_SESSION['message'];
-            unset($_SESSION['message']); ?>
-            <div
-                class="mb-4 p-3 rounded text-sm font-medium 
-        <?= $msg['type'] === 'success' ? 'bg-green-100 text-green-700 border border-green-300' : 'bg-red-100 text-red-700 border border-red-300' ?>">
+            <?php $msg = $_SESSION['message']; unset($_SESSION['message']); ?>
+            <div class="mb-4 p-3 rounded text-sm font-medium 
+                <?= $msg['type'] === 'success' ? 'bg-green-100 text-green-700 border border-green-300' : 'bg-red-100 text-red-700 border border-red-300' ?>">
                 <?= $msg['text'] ?>
             </div>
         <?php endif; ?>
+
         <table class="w-full table-auto border border-collapse bg-white">
             <thead class="bg-gray-200">
                 <tr>
@@ -89,7 +90,7 @@ require '../includes/db.php';
                     ?>
                     <tr>
                         <td class="border p-2"><?= $no++ ?></td>
-                        <td class="border p-2"><?= $row['username'] ?></td>
+                        <td class="border p-2"><?= htmlspecialchars($row['username']) ?></td>
                         <td class="border p-2 capitalize"><?= $row['role'] ?></td>
                         <td class="border p-2 space-x-2">
                             <a href="edit_user.php?id=<?= $row['id'] ?>" class="text-blue-600">Edit</a>
@@ -101,9 +102,7 @@ require '../includes/db.php';
             </tbody>
         </table>
     </main>
-    <script src="../assets/js/sidebar.js">
-
-    </script>
+    <script src="../assets/js/sidebar.js"></script>
 </body>
 
 </html>

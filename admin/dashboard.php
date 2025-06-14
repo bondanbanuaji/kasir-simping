@@ -2,6 +2,11 @@
 session_start();
 if ($_SESSION['role'] != 'admin')
     header("Location: ../index.php");
+require '../includes/db.php';
+
+// Mengambil data jumlah user dan produk
+$jumlahUser = $conn->query("SELECT COUNT(*) AS total FROM users")->fetch_assoc()['total'];
+$jumlahProduk = $conn->query("SELECT COUNT(*) AS total FROM produk")->fetch_assoc()['total'];
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +29,6 @@ if ($_SESSION['role'] != 'admin')
     </script>
     <link rel="stylesheet" href="../assets/css/typingEffect.css">
 </head>
-
 
 <body class="bg-gradient-to-br from-gray-200 via-white to-gray-200 flex min-h-screen">
 
@@ -61,7 +65,6 @@ if ($_SESSION['role'] != 'admin')
         </nav>
     </div>
 
-
     <!-- Main Content -->
     <main class="flex-1 p-8">
         <h1 id="animated-text" class="text-3xl font-bold mb-4 text-gray-900 whitespace-nowrap">
@@ -70,31 +73,22 @@ if ($_SESSION['role'] != 'admin')
         <p class="text-gray-700">
             Anda sedang berada di dashboard admin. Di sini Anda dapat mengelola data pengguna dan produk toko.
         </p>
-        <!-- Contoh statistik sederhana -->
+
+        <!-- Statistik -->
         <div class="mt-6 grid grid-cols-2 gap-6">
             <div class="bg-white p-6 rounded shadow-xl">
                 <h2 class="text-lg font-semibold text-gray-700 mb-2">Total User</h2>
-                <?php
-                require '../includes/db.php';
-                $jumlahUser = $conn->query("SELECT COUNT(*) AS total FROM users")->fetch_assoc()['total'];
-                ?>
                 <p class="text-2xl font-bold text-blue-700"><?= $jumlahUser ?></p>
             </div>
             <div class="bg-white p-6 rounded shadow-xl">
                 <h2 class="text-lg font-semibold text-gray-700 mb-2">Total Produk</h2>
-                <?php
-                $jumlahProduk = $conn->query("SELECT COUNT(*) AS total FROM produk")->fetch_assoc()['total'];
-                ?>
                 <p class="text-2xl font-bold text-blue-700"><?= $jumlahProduk ?></p>
             </div>
         </div>
     </main>
-    <script src="../assets/js/sidebar.js">
-    </script>
+    
+    <script src="../assets/js/sidebar.js"></script>
     <script src="../assets/js/adminTypingEffect.js"></script>
-</body>
-
-
 </body>
 
 </html>

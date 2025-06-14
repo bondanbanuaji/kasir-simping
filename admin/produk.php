@@ -3,7 +3,7 @@ session_start();
 if ($_SESSION['role'] != 'admin') header("Location: ../index.php");
 require '../includes/db.php';
 
-// Ambil data produk
+// Ambil data produk dari database
 $produk = $conn->query("SELECT * FROM produk");
 ?>
 
