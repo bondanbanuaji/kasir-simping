@@ -1,7 +1,7 @@
 const words = [
     "Selamat Datang di Web Kasir Simping",
     "Lihat laporan penjualan dengan mudah",
-    "Pantau semua aktivitas kasir di sini",
+    "Pantau semua aktivitas Toko di sini",
 ];
 
 const typingSpeed = 100;

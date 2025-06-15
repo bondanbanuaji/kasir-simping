@@ -5,6 +5,7 @@ require '../includes/db.php';
 
 // Ambil data produk dari database
 $produk = $conn->query("SELECT * FROM produk");
+date_default_timezone_set('Asia/Jakarta');
 ?>
 
 <!DOCTYPE html>
@@ -63,12 +64,12 @@ $produk = $conn->query("SELECT * FROM produk");
 
     <!-- Flash Message -->
     <?php if (isset($_SESSION['message'])): ?>
-      <div class="bg-green-100 border border-green-300 text-green-800 px-4 py-2 rounded mb-4">
+      <div class="bg-blue-100 border border-blue-300 text-blue-800 px-4 py-2 rounded mb-4">
         <?= $_SESSION['message']; unset($_SESSION['message']); ?>
       </div>
     <?php endif; ?>
 
-    <a href="tambah_produk.php" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded shadow transition inline-block mb-4">
+    <a href="tambah_produk.php" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded shadow transition inline-block mb-4">
       + Tambah Produk
     </a>
 
@@ -88,7 +89,7 @@ $produk = $conn->query("SELECT * FROM produk");
             <tr class="hover:bg-gray-50 transition">
               <td class="border p-2 text-center"><?= $no++ ?></td>
               <td class="border p-2"><?= htmlspecialchars($row['nama']) ?></td>
-              <td class="border p-2">Rp<?= number_format($row['harga']) ?></td>
+              <td class="border p-2">Rp. <?= number_format($row['harga']) ?></td>
               <td class="border p-2 text-center"><?= $row['stok'] ?></td>
               <td class="border p-2 space-x-2 text-center">
                 <a href="edit_produk.php?id=<?= $row['id'] ?>" class="text-blue-600 hover:underline">Edit</a>

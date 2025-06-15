@@ -6,6 +6,7 @@ if ($_SESSION['role'] !== 'admin') {
 }
 
 require '../includes/db.php';
+date_default_timezone_set('Asia/Jakarta');
 
 $status = $_GET['status'] ?? null;
 $msg = $_GET['msg'] ?? '';
@@ -36,6 +37,17 @@ $result = $conn->query($query);
             }
         }
     </script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    transitionProperty: {
+                        'width': 'width'
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 
 <body class="bg-gray-100 flex min-h-screen">
@@ -55,8 +67,7 @@ $result = $conn->query($query);
                 class="flex items-center space-x-2 text-gray-800 hover:text-blue-600 hover:bg-gray-200">
                 <span>📊</span> <span class="sidebar-text">Dashboard</span>
             </a>
-            <a href="users.php"
-                class="flex items-center space-x-2 text-gray-800 hover:text-blue-600 hover:bg-gray-200">
+            <a href="users.php" class="flex items-center space-x-2 text-gray-800 hover:text-blue-600 hover:bg-gray-200">
                 <span>👤</span> <span class="sidebar-text">Kelola Akun</span>
             </a>
             <a href="produk.php"
@@ -77,50 +88,51 @@ $result = $conn->query($query);
     <!-- Konten -->
     <div class="flex-1 p-6">
         <?php if ($status): ?>
-        <div class="mb-4 flex justify-between items-center mb-4">
-            <div
-                class="<?= $status === 'success' ? 'bg-green-100 border-green-400 text-green-700' : 'bg-red-100 border-red-400 text-red-700' ?> border px-4 py-3 rounded relative">
-                <strong class="font-bold"><?= $status === 'success' ? 'Berhasil!' : 'Gagal!' ?></strong>
-                <span class="block sm:inline">
-                    <?= htmlspecialchars($msg) ?>
-                </span>
+            <div class="mb-4 flex justify-between items-center mb-4">
+                <div
+                    class="<?= $status === 'success' ? 'bg-blue-100 border-blue-400 text-blue-700' : 'bg-red-100 border-red-400 text-red-700' ?> border px-4 py-3 rounded relative">
+                    <strong class="font-bold"><?= $status === 'success' ? 'Berhasil!' : 'Gagal!' ?></strong>
+                    <span class="block sm:inline">
+                        <?= htmlspecialchars($msg) ?>
+                    </span>
+                </div>
             </div>
-        </div>
         <?php endif; ?>
 
         <h1 class="text-2xl font-bold mb-4">Kelola Transaksi</h1>
         <div class="overflow-auto bg-white rounded-xl shadow-md p-4">
-        <table class="w-full table-auto">
-            <thead class="bg-gray-100 text-gray-700">
-                <tr>
-                    <th class="px-4 py-2 text-left">Invoice</th>
-                    <th class="px-4 py-2 text-left">Tanggal</th>
-                    <th class="px-4 py-2 text-left">Kasir</th>
-                    <th class="px-4 py-2 text-left">Produk</th>
-                    <th class="px-4 py-2 text-left">Metode</th>
-                    <th class="px-4 py-2 text-left">Total</th>
-                    <th class="px-4 py-2 text-left">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($row = $result->fetch_assoc()): ?>
-                <tr class="border-b">
-                    <td class="px-4 py-2">#<?= htmlspecialchars($row['no_invoice']) ?></td>
-                    <td class="px-4 py-2"><?= htmlspecialchars($row['tgl_transaksi']) ?></td>
-                    <td class="px-4 py-2"><?= htmlspecialchars($row['kasir']) ?></td>
-                    <td class="px-4 py-2"><?= htmlspecialchars($row['nama_produk']) ?></td>
-                    <td class="px-4 py-2 capitalize"><?= htmlspecialchars($row['metode_pembayaran']) ?></td>
-                    <td class="px-4 py-2">Rp <?= number_format($row['total'], 0, ',', '.') ?></td>
-                    <td class="px-4 py-2">
-                        <button onclick="konfirmasiHapus(<?= $row['id_transaksi'] ?>)"
-                            class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">Hapus</button>
-                    </td>
-                </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
+            <table class="w-full table-auto border-xl">
+                <thead class="bg-gray-200 text-gray-700">
+                    <tr class="border-b border p-2">
+                        <th class="px-4 py-2 text-left border p-2">Invoice</th>
+                        <th class="px-4 py-2 text-left border p-2">Tanggal</th>
+                        <th class="px-4 py-2 text-left border p-2">Kasir</th>
+                        <th class="px-4 py-2 text-left border p-2">Produk</th>
+                        <th class="px-4 py-2 text-left border p-2">Metode</th>
+                        <th class="px-4 py-2 text-left border p-2">Total</th>
+                        <th class="px-4 py-2 text-left border p-2">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($row = $result->fetch_assoc()): ?>
+                        <tr class="border-b border p-2">
+                            <td class="px-4 py-2 border p-2">#<?= htmlspecialchars($row['no_invoice']) ?></td>
+                            <td class="px-4 py-2 border p-2"><?= htmlspecialchars($row['tgl_transaksi']) ?></td>
+                            <td class="px-4 py-2 border p-2"><?= htmlspecialchars($row['kasir']) ?></td>
+                            <td class="px-4 py-2 border p-2"><?= htmlspecialchars($row['nama_produk']) ?></td>
+                            <td class="px-4 py-2 border p-2 capitalize"><?= htmlspecialchars($row['metode_pembayaran']) ?></td>
+                            <td class="px-4 py-2 border p-2">Rp. <?= number_format($row['total'], 0, ',', '.') ?></td>
+                            <td class="px-4 py-2 border p-2">
+                                <button onclick="konfirmasiHapus(<?= $row['id_transaksi'] ?>)"
+                                    class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">Hapus Transaksi</button>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
         </div>
     </div>
     <script src="../assets/js/sidebar.js"></script>
 </body>
+
 </html>

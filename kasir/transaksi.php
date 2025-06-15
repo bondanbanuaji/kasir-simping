@@ -3,6 +3,7 @@ session_start();
 if ($_SESSION['role'] != 'kasir')
     header("Location: ../index.php");
 require '../includes/db.php';
+date_default_timezone_set('Asia/Jakarta');
 
 $produk = $conn->query("SELECT * FROM produk");
 
@@ -37,7 +38,7 @@ $msg = $_GET['msg'] ?? '';
                     <input type="hidden" name="produk_id[]" value="${id}">
                     <input type="hidden" name="nama[]" value="${nama}">
                 </td>
-                <td class="border p-2">${harga}<input type="hidden" name="harga[]" value="${harga}"></td>
+                <td class="border p-2">Rp. ${harga}<input type="hidden" name="harga[]" value="${harga}"></td>
                 <td class="border p-2">${jumlah}<input type="hidden" name="jumlah[]" value="${jumlah}"></td>
                 <td class="border p-2">${subtotal}</td>`;
 
@@ -68,26 +69,26 @@ $msg = $_GET['msg'] ?? '';
 <body class="bg-gradient-to-br from-gray-200 via-white to-gray-200 flex min-h-screen">
 
     <!-- Sidebar -->
-    <div id="sidebar" class="transition-all duration-300 w-[13rem] bg-white shadow-lg flex flex-col p-4 space-y-4">
-        <span onclick="toggleSidebar()"
-            class="cursor-pointer w-10 h-10 flex flex-col justify-center items-center hover:bg-gray-200 rounded transition">
+    <div id="sidebar" class="transition-all duration-300 w-[13rem] bg-white shadow-lg flex flex-col p-4 space-y-4 
+        bg-gradient-to-br from-gray-200 via-white to-gray-200">
+        <span onclick="toggleSidebar()" class="cursor-pointer w-10 h-10 flex flex-col justify-center items-center hover:bg-gray-200 rounded transition">
             <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
             <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
             <span class="block w-6 h-0.5 bg-gray-600"></span>
         </span>
 
-        <h2 class="text-xl font-bold text-purple-600">Kasir Menu</h2>
+        <h2 id="sidebar-title" class="text-xl font-bold text-purple-600">Kasir Menu</h2>
         <nav class="flex flex-col space-y-3">
-            <a href="dashboard.php" class="flex items-center space-x-2 text-gray-800 hover:text-purple-600">
+            <a href="dashboard.php" class="flex items-center space-x-2 text-gray-800 hover:text-purple-600 hover:bg-gray-200">
                 <span>📊</span> <span class="sidebar-text">Dashboard</span>
             </a>
-            <a href="transaksi.php" class="font-bold flex items-center space-x-2 text-gray-800 hover:text-purple-600">
+            <a href="transaksi.php" class="font-semibold flex items-center space-x-2 text-gray-800 hover:text-purple-600 hover:bg-gray-200">
                 <span>💵</span> <span class="sidebar-text">Transaksi</span>
             </a>
-            <a href="riwayat.php" class="flex items-center space-x-2 text-gray-800 hover:text-purple-600">
+            <a href="riwayat.php" class="flex items-center space-x-2 text-gray-800 hover:text-purple-600 hover:bg-gray-200">
                 <span>⏲️</span> <span class="sidebar-text">Riwayat Transaksi</span>
             </a>
-            <a href="../proses/logout.php" class="flex items-center space-x-2 text-red-600 mt-4">
+            <a href="../proses/logout.php" class="flex items-center space-x-2 text-red-600 mt-4 hover:bg-red-200 hover:text-black">
                 <span>🚪</span> <span class="sidebar-text">Logout</span>
             </a>
         </nav>
@@ -140,8 +141,8 @@ $msg = $_GET['msg'] ?? '';
             <div class="mb-4">
                 <label for="metode">Metode Pembayaran: </label>
                 <select name="metode_pembayaran" required class="border p-2">
-                    <option value="tunai">Tunai</option>
-                    <option value="non-tunai">Non-Tunai</option>
+                    <option value="tunai">Cash</option>
+                    <option value="non-tunai">Kredit (Non Tunai)</option>
                 </select>
             </div>
 

@@ -46,7 +46,7 @@ $result = mysqli_query($conn, $query);
         </span>
 
         <!-- Judul Sidebar -->
-        <h2 id="sidebar-title" class="text-xl font-bold text-green-600">Pemilik Panel</h2>
+        <h2 id="sidebar-title" class="text-xl font-bold text-green-600">Pemilik Menu</h2>
 
         <!-- Menu -->
         <nav class="flex flex-col space-y-3">
@@ -54,7 +54,7 @@ $result = mysqli_query($conn, $query);
                 <span>📊</span> <span class="sidebar-text">Dashboard</span>
             </a>
             <a href="laporan.php" class="font-semibold flex items-center space-x-2 text-gray-800 hover:text-green-600 hover:bg-gray-200">
-                <span>📄</span> <span class="sidebar-text">Laporan</span>
+                <span>📄</span> <span class="sidebar-text">Cek Laporan Transaksi</span>
             </a>
             <a href="../proses/logout.php" class="flex items-center space-x-2 text-red-600 mt-4 hover:text-black hover:bg-red-200">
                 <span>🚪</span> <span class="sidebar-text">Logout</span>
@@ -67,22 +67,22 @@ $result = mysqli_query($conn, $query);
         <div class="flex justify-between items-center mb-4">
             <h1 class="text-2xl font-bold">Laporan Transaksi</h1>
             <a href="cetak_laporan.php" target="_blank"
-                class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">📄 Cetak PDF</a>
+                class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg shadow-xl">📄 Cetak PDF</a>
         </div>
 
         <div class="overflow-auto bg-white rounded-xl shadow-md p-4">
             <table class="w-full table-auto">
                 <thead class="bg-gray-100 text-gray-700">
-                    <tr>
-                        <th class="px-4 py-2 text-left">Invoice</th>
-                        <th class="px-4 py-2 text-left">Tanggal</th>
-                        <th class="px-4 py-2 text-left">Kasir</th>
-                        <th class="px-4 py-2 text-left">Produk</th>
-                        <th class="px-4 py-2 text-left">Metode</th>
-                        <th class="px-4 py-2 text-left">Total</th>
+                    <tr class="border-b border p-2">
+                        <th class="px-4 py-2 text-left border p-2">Invoice</th>
+                        <th class="px-4 py-2 text-left border p-2">Tanggal</th>
+                        <th class="px-4 py-2 text-left border p-2">Kasir</th>
+                        <th class="px-4 py-2 text-left border p-2">Produk</th>
+                        <th class="px-4 py-2 text-left border p-2">Metode</th>
+                        <th class="px-4 py-2 text-left border p-2">Total</th>
                     </tr>
                 </thead>
-                <tbody class="text-gray-800">
+                <tbody class="text-gray-800 border p-2">
                     <?php if (mysqli_num_rows($result) > 0): ?>
                         <?php while ($row = mysqli_fetch_assoc($result)): ?>
                             <?php
@@ -90,13 +90,13 @@ $result = mysqli_query($conn, $query);
                                 $tanggal = date_format($tanggal_waktu, 'Y-m-d');
                                 $jam = date_format($tanggal_waktu, 'H:i:s');
                             ?>
-                            <tr class="border-b">
-                                <td class="px-4 py-2"><?= $row['no_invoice'] ?></td>
-                                <td class="px-4 py-2"><?= $tanggal ?></td>
-                                <td class="px-4 py-2"><?= $row['nama_kasir'] ?></td>
-                                <td class="px-4 py-2"><?= $row['daftar_produk'] ?></td>
-                                <td class="px-4 py-2"><?= $row['metode_pembayaran'] ?></td>
-                                <td class="px-4 py-2">Rp <?= number_format($row['total'], 0, ',', '.') ?></td>
+                            <tr class="border-b border p-2">
+                                <td class="px-4 py-2 border p-2"><?= $row['no_invoice'] ?></td>
+                                <td class="px-4 py-2 border p-2"><?= $tanggal ?></td>
+                                <td class="px-4 py-2 border p-2"><?= $row['nama_kasir'] ?></td>
+                                <td class="px-4 py-2 border p-2"><?= $row['daftar_produk'] ?></td>
+                                <td class="px-4 py-2 border p-2"><?= $row['metode_pembayaran'] ?></td>
+                                <td class="px-4 py-2 border p-2">Rp <?= number_format($row['total'], 0, ',', '.') ?></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>

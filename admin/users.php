@@ -5,6 +5,7 @@ if ($_SESSION['role'] != 'admin') {
     exit();
 }
 require '../includes/db.php';
+date_default_timezone_set('Asia/Jakarta');
 ?>
 
 <!DOCTYPE html>
@@ -29,49 +30,57 @@ require '../includes/db.php';
 
 <body class="bg-gradient-to-br from-gray-200 via-white to-gray-100 flex min-h-screen">
 
-  <!-- Sidebar -->
-  <div id="sidebar" class="transition-all duration-300 w-[13rem] bg-white shadow-lg flex flex-col p-4 space-y-4 bg-gradient-to-br from-gray-200 via-white to-gray-100">
-    <span onclick="toggleSidebar()" class="cursor-pointer w-10 h-10 flex flex-col justify-center items-center hover:bg-gray-200 rounded transition">
-      <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
-      <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
-      <span class="block w-6 h-0.5 bg-gray-600"></span>
-    </span>
+    <!-- Sidebar -->
+    <div id="sidebar"
+        class="transition-all duration-300 w-[13rem] bg-white shadow-lg flex flex-col p-4 space-y-4 bg-gradient-to-br from-gray-200 via-white to-gray-100">
+        <span onclick="toggleSidebar()"
+            class="cursor-pointer w-10 h-10 flex flex-col justify-center items-center hover:bg-gray-200 rounded transition">
+            <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
+            <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
+            <span class="block w-6 h-0.5 bg-gray-600"></span>
+        </span>
 
-    <h2 id="sidebar-title" class="text-xl font-bold text-blue-600">Admin Menu</h2>
-    <nav class="flex flex-col space-y-3">
-            <a href="dashboard.php" class="flex items-center space-x-2 text-gray-800 hover:text-blue-600 hover:bg-gray-200">
+        <h2 id="sidebar-title" class="text-xl font-bold text-blue-600">Admin Menu</h2>
+        <nav class="flex flex-col space-y-3">
+            <a href="dashboard.php"
+                class="flex items-center space-x-2 text-gray-800 hover:text-blue-600 hover:bg-gray-200">
                 <span>📊</span> <span class="sidebar-text">Dashboard</span>
             </a>
-            <a href="users.php" class="font-semibold flex items-center space-x-2 text-gray-800 hover:text-blue-600 hover:bg-gray-200">
+            <a href="users.php"
+                class="font-semibold flex items-center space-x-2 text-gray-800 hover:text-blue-600 hover:bg-gray-200">
                 <span>👤</span> <span class="sidebar-text">Kelola Akun</span>
             </a>
-            <a href="produk.php" class="flex items-center space-x-2 text-gray-800 hover:text-blue-600 hover:bg-gray-200">
+            <a href="produk.php"
+                class="flex items-center space-x-2 text-gray-800 hover:text-blue-600 hover:bg-gray-200">
                 <span>📦</span> <span class="sidebar-text">Kelola Produk</span>
             </a>
-            <a href="kelola_transaksi.php" class="flex items-center space-x-2 text-gray-800 hover:text-blue-600 hover:bg-gray-200">
+            <a href="kelola_transaksi.php"
+                class="flex items-center space-x-2 text-gray-800 hover:text-blue-600 hover:bg-gray-200">
                 <span>📦</span> <span class="sidebar-text">Kelola Transaksi</span>
             </a>
-            <a href="../proses/logout.php" class="flex items-center space-x-2 text-red-600 mt-4 hover:text-black hover:bg-red-200">
+            <a href="../proses/logout.php"
+                class="flex items-center space-x-2 text-red-600 mt-4 hover:text-black hover:bg-red-200">
                 <span>🚪</span> <span class="sidebar-text">Logout</span>
             </a>
         </nav>
-  </div>
+    </div>
 
 
     <!-- Content -->
     <main class="flex-1 p-8">
         <h1 class="text-2xl font-bold mb-4">Kelola Akun Disini</h1>
-        <a href="tambah_user.php" class="bg-green-500 text-white px-4 py-2 rounded mb-4 inline-block">+ Tambah Akun</a>
+        <a href="tambah_user.php" class="bg-blue-500 text-white px-4 py-2 rounded mb-4 inline-block">+ Tambah Akun</a>
 
         <?php if (isset($_SESSION['message'])): ?>
-            <?php $msg = $_SESSION['message']; unset($_SESSION['message']); ?>
+            <?php $msg = $_SESSION['message'];
+            unset($_SESSION['message']); ?>
             <div class="mb-4 p-3 rounded text-sm font-medium 
-                <?= $msg['type'] === 'success' ? 'bg-green-100 text-green-700 border border-green-300' : 'bg-red-100 text-red-700 border border-red-300' ?>">
-                <?= $msg['text'] ?>
-            </div>
+                <?= $msg['type'] === 'success' ? 'bg-blue-100 text-blue-700 border border-blue-300' : 'bg-red-100 text-red-700 border border-red-300' ?>">
+                    <?= $msg['text'] ?>
+                </div>
         <?php endif; ?>
 
-        <table class="w-full table-auto border border-collapse bg-white">
+        <table class=" w-full table-auto border border-collapse bg-white">
             <thead class="bg-gray-200">
                 <tr>
                     <th class="border p-2">No</th>
@@ -98,7 +107,7 @@ require '../includes/db.php';
                     </tr>
                 <?php endwhile; ?>
             </tbody>
-        </table>
+            </table>
     </main>
     <script src="../assets/js/sidebar.js"></script>
 </body>

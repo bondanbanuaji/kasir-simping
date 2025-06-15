@@ -6,6 +6,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'kasir') {
 }
 
 require '../includes/db.php';
+date_default_timezone_set('Asia/Jakarta');
 
 $kasir_id = $_SESSION['user_id'];
 
@@ -29,34 +30,41 @@ $result = $conn->query($query);
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <title>Riwayat Transaksi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../assets/css/typingEffect.css">
 </head>
+
 <body class="bg-gradient-to-br from-gray-200 via-white to-gray-200 flex min-h-screen">
 
     <!-- Sidebar -->
-    <div id="sidebar" class="transition-all duration-300 w-[13rem] bg-white shadow-lg flex flex-col p-4 space-y-4">
+   <div id="sidebar" class="transition-all duration-300 w-[13rem] bg-white shadow-lg flex flex-col p-4 space-y-4 
+        bg-gradient-to-br from-gray-200 via-white to-gray-200">
         <span onclick="toggleSidebar()" class="cursor-pointer w-10 h-10 flex flex-col justify-center items-center hover:bg-gray-200 rounded transition">
             <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
             <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
             <span class="block w-6 h-0.5 bg-gray-600"></span>
         </span>
 
-        <h2 class="text-xl font-bold text-purple-600">Kasir Menu</h2>
+        <h2 id="sidebar-title" class="text-xl font-bold text-purple-600">Kasir Menu</h2>
         <nav class="flex flex-col space-y-3">
-            <a href="dashboard.php" class="flex items-center space-x-2 text-gray-800 hover:text-purple-600">
+            <a href="dashboard.php"
+                class="flex items-center space-x-2 text-gray-800 hover:text-purple-600 hover:bg-gray-200">
                 <span>📊</span> <span class="sidebar-text">Dashboard</span>
             </a>
-            <a href="transaksi.php" class="flex items-center space-x-2 text-gray-800 hover:text-purple-600">
+            <a href="transaksi.php"
+                class="flex items-center space-x-2 text-gray-800 hover:text-purple-600 hover:bg-gray-200">
                 <span>💵</span> <span class="sidebar-text">Transaksi</span>
             </a>
-            <a href="riwayat.php" class="font-bold flex items-center space-x-2 text-purple-600 font-bold">
+            <a href="riwayat.php"
+                class="font-semibold flex items-center space-x-2 text-gray-800 hover:text-purple-600 hover:bg-gray-200">
                 <span>⏲️</span> <span class="sidebar-text">Riwayat Transaksi</span>
             </a>
-            <a href="../proses/logout.php" class="flex items-center space-x-2 text-red-600 mt-4">
+            <a href="../proses/logout.php"
+                class="flex items-center space-x-2 text-red-600 mt-4 hover:bg-red-200 hover:text-black">
                 <span>🚪</span> <span class="sidebar-text">Logout</span>
             </a>
         </nav>
@@ -81,7 +89,7 @@ $result = $conn->query($query);
                 </thead>
                 <tbody>
                     <?php if ($result && $result->num_rows > 0): ?>
-                        <?php while ($t = $result->fetch_assoc()): 
+                        <?php while ($t = $result->fetch_assoc()):
                             $transaksi_id = $t['transaksi_id'];
                             $produk = $conn->query("
                                 SELECT produk.nama, detail_transaksi.jumlah 
@@ -96,16 +104,16 @@ $result = $conn->query($query);
                                 $nama_produk[] = $p['nama'];
                                 $stok_dibeli[] = $p['jumlah'];
                             }
-                        ?>
-                        <tr>
-                            <td class="border p-2"><?= $t['transaksi_id'] ?></td>
-                            <td class="border p-2"><?= $t['no_invoice'] ?></td>
-                            <td class="border p-2"><?= implode(', ', $nama_produk) ?></td>
-                            <td class="border p-2"><?= $t['tgl_transaksi'] ?></td>
-                            <td class="border p-2">Rp<?= number_format($t['total'], 0, ',', '.') ?></td>
-                            <td class="border p-2"><?= $t['username'] ?></td>
-                            <td class="border p-2"><?= implode(', ', $stok_dibeli) ?></td>
-                        </tr>
+                            ?>
+                            <tr>
+                                <td class="border p-2"><?= $t['transaksi_id'] ?></td>
+                                <td class="border p-2"><?= $t['no_invoice'] ?></td>
+                                <td class="border p-2"><?= implode(', ', $nama_produk) ?></td>
+                                <td class="border p-2"><?= $t['tgl_transaksi'] ?></td>
+                                <td class="border p-2">Rp. <?= number_format($t['total'], 0, ',', '.') ?></td>
+                                <td class="border p-2"><?= $t['username'] ?></td>
+                                <td class="border p-2"><?= implode(', ', $stok_dibeli) ?></td>
+                            </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
@@ -120,4 +128,5 @@ $result = $conn->query($query);
     <script src="../assets/js/sidebar.js"></script>
     <script src="../assets/js/kasirTypingEffect.js"></script>
 </body>
+
 </html>

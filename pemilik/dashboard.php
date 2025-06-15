@@ -55,7 +55,7 @@ $total_pemasukan_harian = mysqli_fetch_assoc(mysqli_query($conn, $queryHarian))[
                 <span>📊</span> <span class="sidebar-text">Dashboard</span>
             </a>
             <a href="laporan.php" class="flex items-center space-x-2 text-gray-800 hover:text-green-600 hover:bg-gray-200">
-                <span>📄</span> <span class="sidebar-text">Laporan</span>
+                <span>📄</span> <span class="sidebar-text">Cek Laporan Transaksi</span>
             </a>
             <a href="../proses/logout.php" class="flex items-center space-x-2 text-red-600 mt-4 hover:text-black hover:bg-red-200">
                 <span>🚪</span> <span class="sidebar-text">Logout</span>
@@ -64,7 +64,7 @@ $total_pemasukan_harian = mysqli_fetch_assoc(mysqli_query($conn, $queryHarian))[
     </div>
 
     <!-- Konten Utama -->
-    <div class="flex-1 p-6">
+    <div class="flex-1 p-8">
         <h1 id="animated-text" class="text-3xl font-bold mb-4 text-gray-900 whitespace-nowrap">
             <span id="typed-text"></span><span class="cursor text-green-600">|</span>
         </h1> 
@@ -72,22 +72,22 @@ $total_pemasukan_harian = mysqli_fetch_assoc(mysqli_query($conn, $queryHarian))[
             Anda sedang berada di dashboard pemilik. Di sini Anda dapat mengelola laporan transaksi dan pemasukan toko.
         </p>
         <br>
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-            <div class="bg-white rounded-xl shadow-md p-4">
-                <p class="text-gray-600">Total Transaksi</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div class="bg-white rounded-xl shadow-xl p-6">
+                <h2 class="text-lg font-semibold mb-2 text-gray-600">Total Transaksi</h2>
                 <p class="text-2xl font-bold text-green-600"><?= $total_transaksi ?></p>
             </div>
-            <div class="bg-white rounded-xl shadow-md p-4">
-                <p class="text-gray-600">Produk Terjual</p>
+            <div class="bg-white rounded-xl shadow-xl p-6">
+                <h2 class="text-lg font-semibold mb-2 text-gray-600">Total Produk Terjual</h2>
                 <p class="text-2xl font-bold text-green-600"><?= $total_produk ?></p>
             </div>
-            <div class="bg-white rounded-xl shadow-md p-4">
-                <p class="text-gray-600">Pendapatan Hari Ini</p>
-                <p class="text-2xl font-bold text-green-600">Rp <?= number_format($total_pemasukan_harian, 0, ",", ".") ?></p>
+            <div class="bg-white rounded-xl shadow-xl p-6">
+                <h2 class="text-lg font-semibold mb-2 text-gray-600">Total Pendapatan Hari Ini</h2>
+                <p class="text-2xl font-bold text-green-600">Rp. <?= number_format($total_pemasukan_harian, 0, ",", ".") ?></p>
             </div>
-            <div class="bg-white rounded-xl shadow-md p-4">
-                <p class="text-gray-600">Seluruh Pendapatan Total</p>
-                <p class="text-2xl font-bold text-green-600">Rp <?= number_format($total_pemasukan, 0, ",", ".") ?></p>
+            <div class="bg-white rounded-xl shadow-xl p-6">
+                <h2 class="text-lg font-semibold mb-2 text-gray-600">Total Seluruh Pendapatan</h2>
+                <p class="text-2xl font-bold text-green-600">Rp. <?= number_format($total_pemasukan, 0, ",", ".") ?></p>
             </div>
         </div>
     </div>
