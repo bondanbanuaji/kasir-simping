@@ -12,7 +12,7 @@ $produk = $conn->query("SELECT * FROM produk");
 
 <head>
   <meta charset="UTF-8" />
-  <title>Manajemen Produk</title>
+  <title>Kelola Produk</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -45,7 +45,7 @@ $produk = $conn->query("SELECT * FROM produk");
       <a href="users.php" class="flex items-center space-x-2 text-gray-800 hover:text-blue-600">
         <span>👤</span> <span class="sidebar-text">Kelola Akun</span>
       </a>
-      <a href="produk.php" class="flex items-center space-x-2 text-gray-800 hover:text-blue-600 font-semibold">
+      <a href="produk.php" class="font-bold flex items-center space-x-2 text-gray-800 hover:text-blue-600 font-semibold">
         <span>📦</span> <span class="sidebar-text">Kelola Produk</span>
       </a>
       <a href="../proses/logout.php" class="flex items-center space-x-2 text-red-600 mt-4">
@@ -56,7 +56,7 @@ $produk = $conn->query("SELECT * FROM produk");
 
   <!-- Main Content -->
   <main class="flex-1 p-8">
-    <h1 class="text-2xl font-bold mb-4">Manajemen Produk</h1>
+    <h1 class="text-2xl font-bold mb-4">Kelola Produk Disini</h1>
 
     <!-- Flash Message -->
     <?php if (isset($_SESSION['message'])): ?>

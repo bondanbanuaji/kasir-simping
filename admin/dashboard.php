@@ -14,7 +14,7 @@ $jumlahProduk = $conn->query("SELECT COUNT(*) AS total FROM produk")->fetch_asso
 
 <head>
     <meta charset="UTF-8" />
-    <title>Halaman Admin</title>
+    <title>Dashboard Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -50,7 +50,7 @@ $jumlahProduk = $conn->query("SELECT COUNT(*) AS total FROM produk")->fetch_asso
 
         <!-- Menu -->
         <nav class="flex flex-col space-y-3">
-            <a href="dashboard.php" class="flex items-center space-x-2 text-gray-800 hover:text-blue-600">
+            <a href="dashboard.php" class="font-bold flex items-center space-x-2 text-gray-800 hover:text-blue-600">
                 <span>📊</span> <span class="sidebar-text">Dashboard</span>
             </a>
             <a href="users.php" class="flex items-center space-x-2 text-gray-800 hover:text-blue-600">

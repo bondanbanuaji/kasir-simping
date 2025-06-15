@@ -40,7 +40,7 @@ require '../proses/connect.php';
         <h2 id="sidebar-title" class="text-xl font-bold text-purple-600">Kasir Menu</h2>
 
         <nav class="flex flex-col space-y-3">
-            <a href="dashboard.php" class="flex items-center space-x-2 text-gray-800 hover:text-purple-600">
+            <a href="dashboard.php" class="font-bold flex items-center space-x-2 text-gray-800 hover:text-purple-600">
                 <span>📊</span> <span class="sidebar-text">Dashboard</span>
             </a>
             <a href="transaksi.php" class="flex items-center space-x-2 text-gray-800 hover:text-purple-600">

@@ -40,7 +40,7 @@ $total_pemasukan_harian = mysqli_fetch_assoc(mysqli_query($conn, $queryHarian))[
     <div id="sidebar" class="transition-all duration-300 w-[13rem] bg-white shadow-lg flex flex-col p-4 space-y-4 
         bg-gradient-to-br from-gray-200 via-white to-gray-200">
         <!-- Toggle Button -->
-        <span onclick="toggleSidebar()" class="cursor-pointer w-10 h-10 flex flex-col justify-center items-center hover:bg-gray-200 rounded transition">
+        <span onclick="toggleSidebar()" class="cursor-pointer w-10 h-10 flex flex-col justify-center items-center hover:bg-gray-300 rounded transition">
             <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
             <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
             <span class="block w-6 h-0.5 bg-gray-600"></span>
@@ -51,13 +51,13 @@ $total_pemasukan_harian = mysqli_fetch_assoc(mysqli_query($conn, $queryHarian))[
 
         <!-- Menu -->
         <nav class="flex flex-col space-y-3">
-            <a href="dashboard.php" class="flex items-center space-x-2 text-gray-800 hover:text-green-600">
+            <a href="dashboard.php" class="font-semibold flex items-center space-x-2 text-gray-800 hover:text-green-600 hover:bg-gray-200">
                 <span>📊</span> <span class="sidebar-text">Dashboard</span>
             </a>
-            <a href="laporan.php" class="flex items-center space-x-2 text-gray-800 hover:text-green-600">
+            <a href="laporan.php" class="flex items-center space-x-2 text-gray-800 hover:text-green-600 hover:bg-gray-200">
                 <span>📄</span> <span class="sidebar-text">Laporan</span>
             </a>
-            <a href="../proses/logout.php" class="flex items-center space-x-2 text-red-600 mt-4">
+            <a href="../proses/logout.php" class="flex items-center space-x-2 text-red-600 mt-4 hover:text-black hover:bg-red-200">
                 <span>🚪</span> <span class="sidebar-text">Logout</span>
             </a>
         </nav>
@@ -68,6 +68,10 @@ $total_pemasukan_harian = mysqli_fetch_assoc(mysqli_query($conn, $queryHarian))[
         <h1 id="animated-text" class="text-3xl font-bold mb-4 text-gray-900 whitespace-nowrap">
             <span id="typed-text"></span><span class="cursor text-green-600">|</span>
         </h1> 
+        <p class="text-gray-700">
+            Anda sedang berada di dashboard pemilik. Di sini Anda dapat mengelola laporan transaksi dan pemasukan toko.
+        </p>
+        <br>
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
             <div class="bg-white rounded-xl shadow-md p-4">
                 <p class="text-gray-600">Total Transaksi</p>

@@ -53,7 +53,7 @@ $result = $conn->query($query);
             <a href="transaksi.php" class="flex items-center space-x-2 text-gray-800 hover:text-purple-600">
                 <span>💵</span> <span class="sidebar-text">Transaksi</span>
             </a>
-            <a href="riwayat.php" class="flex items-center space-x-2 text-purple-600 font-bold">
+            <a href="riwayat.php" class="font-bold flex items-center space-x-2 text-purple-600 font-bold">
                 <span>⏲️</span> <span class="sidebar-text">Riwayat Transaksi</span>
             </a>
             <a href="../proses/logout.php" class="flex items-center space-x-2 text-red-600 mt-4">

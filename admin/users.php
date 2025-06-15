@@ -47,7 +47,7 @@ require '../includes/db.php';
             <a href="dashboard.php" class="flex items-center space-x-2 text-gray-800 hover:text-blue-600">
                 <span>📊</span> <span class="sidebar-text">Dashboard</span>
             </a>
-            <a href="users.php" class="flex items-center space-x-2 text-gray-800 hover:text-blue-600">
+            <a href="users.php" class="font-bold flex items-center space-x-2 text-gray-800 hover:text-blue-600">
                 <span>👤</span> <span class="sidebar-text">Kelola Akun</span>
             </a>
             <a href="produk.php" class="flex items-center space-x-2 text-gray-800 hover:text-blue-600">
@@ -62,7 +62,7 @@ require '../includes/db.php';
 
     <!-- Content -->
     <main class="flex-1 p-8">
-        <h1 class="text-2xl font-bold mb-4">Manajemen Akun</h1>
+        <h1 class="text-2xl font-bold mb-4">Kelola Akun Disini</h1>
         <a href="tambah_user.php" class="bg-green-500 text-white px-4 py-2 rounded mb-4 inline-block">+ Tambah Akun</a>
 
         <?php if (isset($_SESSION['message'])): ?>

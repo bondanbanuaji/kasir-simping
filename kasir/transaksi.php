@@ -81,7 +81,7 @@ $msg = $_GET['msg'] ?? '';
             <a href="dashboard.php" class="flex items-center space-x-2 text-gray-800 hover:text-purple-600">
                 <span>📊</span> <span class="sidebar-text">Dashboard</span>
             </a>
-            <a href="transaksi.php" class="flex items-center space-x-2 text-gray-800 hover:text-purple-600">
+            <a href="transaksi.php" class="font-bold flex items-center space-x-2 text-gray-800 hover:text-purple-600">
                 <span>💵</span> <span class="sidebar-text">Transaksi</span>
             </a>
             <a href="riwayat.php" class="flex items-center space-x-2 text-gray-800 hover:text-purple-600">

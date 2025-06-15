@@ -14,10 +14,10 @@ if (isset($_SESSION['role'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Web Kasir Simping</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" 
-    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" 
-    crossorigin="anonymous" 
-    referrerpolicy="no-referrer" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script>
     tailwind.config = {
       theme: {
@@ -52,8 +52,13 @@ if (isset($_SESSION['role'])) {
 
     <?php if (!empty($_SESSION['error'])): ?>
       <div class="bg-red-100 text-red-700 p-3 rounded mb-4 text-sm animate-fadeIn shadow">
-        <?= $_SESSION['error'];
-        unset($_SESSION['error']); ?>
+        <?= $_SESSION['error']; unset($_SESSION['error']); ?>
+      </div>
+    <?php endif; ?>
+
+    <?php if (isset($_GET['expired'])): ?>
+      <div class="bg-yellow-100 text-yellow-800 p-3 rounded mb-4 text-sm animate-fadeIn shadow">
+        Sesi Anda telah berakhir karena tidak aktif selama 2 jam. Silakan login kembali.
       </div>
     <?php endif; ?>
 
@@ -62,7 +67,8 @@ if (isset($_SESSION['role'])) {
       <input type="text" name="username" id="username" required
         class="peer block w-full appearance-none rounded-md border border-gray-300 bg-white px-3 pt-5 pb-2.5 text-sm text-gray-900 shadow-sm focus:border-blue-600 focus:outline-none focus:ring-0"
         placeholder=" " />
-      <label for="username" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-3.5 scale-75 top-0 left-3 z-10 origin-[0] px-1 bg-white shadow-sm
+      <label for="username"
+        class="absolute text-sm text-gray-500 duration-300 transform -translate-y-3.5 scale-75 top-0 left-3 z-10 origin-[0] px-1 bg-white shadow-sm
                peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-3
                peer-placeholder-shown:text-base peer-focus:scale-75 peer-focus:-translate-y-3.5">
         Masukkan Username
@@ -74,7 +80,8 @@ if (isset($_SESSION['role'])) {
       <input type="password" name="password" id="password" required
         class="peer block w-full appearance-none rounded-md border border-gray-300 bg-white px-3 pt-5 pb-2.5 text-sm text-gray-900 shadow-sm focus:border-blue-600 focus:outline-none focus:ring-0"
         placeholder=" " />
-      <label for="password" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-3.5 scale-75 top-0 left-3 z-10 origin-[0] px-1 bg-white shadow-sm
+      <label for="password"
+        class="absolute text-sm text-gray-500 duration-300 transform -translate-y-3.5 scale-75 top-0 left-3 z-10 origin-[0] px-1 bg-white shadow-sm
                peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-3
                peer-placeholder-shown:text-base peer-focus:scale-75 peer-focus:-translate-y-3.5">
         Masukkan Password

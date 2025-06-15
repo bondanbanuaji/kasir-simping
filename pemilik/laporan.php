@@ -36,26 +36,27 @@ $result = mysqli_query($conn, $query);
 <body class="bg-gradient-to-br from-gray-200 via-white to-gray-200 flex min-h-screen">
 
     <!-- Sidebar -->
-    <div id="sidebar"
-        class="transition-all duration-300 w-[13rem] bg-white shadow-lg flex flex-col p-4 space-y-4 bg-gradient-to-br from-gray-200 via-white to-gray-200">
+    <div id="sidebar" class="transition-all duration-300 w-[13rem] bg-white shadow-lg flex flex-col p-4 space-y-4 
+        bg-gradient-to-br from-gray-200 via-white to-gray-200">
         <!-- Toggle Button -->
-        <span onclick="toggleSidebar()"
-            class="cursor-pointer w-10 h-10 flex flex-col justify-center items-center hover:bg-gray-200 rounded transition">
+        <span onclick="toggleSidebar()" class="cursor-pointer w-10 h-10 flex flex-col justify-center items-center hover:bg-gray-300 rounded transition">
             <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
             <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
             <span class="block w-6 h-0.5 bg-gray-600"></span>
         </span>
 
+        <!-- Judul Sidebar -->
         <h2 id="sidebar-title" class="text-xl font-bold text-green-600">Pemilik Panel</h2>
 
+        <!-- Menu -->
         <nav class="flex flex-col space-y-3">
-            <a href="dashboard.php" class="flex items-center space-x-2 text-gray-800 hover:text-green-600">
+            <a href="dashboard.php" class="flex items-center space-x-2 text-gray-800 hover:text-green-600 hover:bg-gray-200">
                 <span>📊</span> <span class="sidebar-text">Dashboard</span>
             </a>
-            <a href="laporan.php" class="flex items-center space-x-2 text-gray-800 hover:text-green-600">
+            <a href="laporan.php" class="font-semibold flex items-center space-x-2 text-gray-800 hover:text-green-600 hover:bg-gray-200">
                 <span>📄</span> <span class="sidebar-text">Laporan</span>
             </a>
-            <a href="../proses/logout.php" class="flex items-center space-x-2 text-red-600 mt-4">
+            <a href="../proses/logout.php" class="flex items-center space-x-2 text-red-600 mt-4 hover:text-black hover:bg-red-200">
                 <span>🚪</span> <span class="sidebar-text">Logout</span>
             </a>
         </nav>
