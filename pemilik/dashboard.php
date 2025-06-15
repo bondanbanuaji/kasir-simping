@@ -47,7 +47,7 @@ $total_pemasukan_harian = mysqli_fetch_assoc(mysqli_query($conn, $queryHarian))[
         </span>
 
         <!-- Judul Sidebar -->
-        <h2 id="sidebar-title" class="text-xl font-bold text-green-600">Pemilik Panel</h2>
+        <h2 id="sidebar-title" class="text-xl font-bold text-green-600">Pemilik Menu</h2>
 
         <!-- Menu -->
         <nav class="flex flex-col space-y-3">

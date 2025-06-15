@@ -1,0 +1,27 @@
+    .btn-gradient {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(to right, #3B82F6, #9333EA);
+    color: white;
+    }
+
+    .btn-gradient::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%; 
+    background: linear-gradient(to right,rgb(54, 114, 212), rgb(139, 68, 206));
+    transition: all 0.5s ease;
+    z-index: 0;
+    }
+
+    .btn-gradient:hover::before {
+    left: 0;
+    }
+
+    .btn-gradient span {
+    position: relative;
+    z-index: 10;
+    }
