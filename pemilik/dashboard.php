@@ -7,21 +7,26 @@ if ($_SESSION['role'] != 'pemilik') {
 
 include '../proses/connect.php';
 
-// Hitung Total Transaksi
+date_default_timezone_set('Asia/Jakarta');
+$today = date('Y-m-d');
+
+// Total Transaksi
 $queryTransaksi = "SELECT COUNT(*) AS total FROM transaksi";
-$result1 = mysqli_query($conn, $queryTransaksi);
-$total_transaksi = mysqli_fetch_assoc($result1)['total'] ?? 0;
+$total_transaksi = mysqli_fetch_assoc(mysqli_query($conn, $queryTransaksi))['total'] ?? 0;
 
-// Hitung Total Produk Terjual
+// Produk Terjual
 $queryProdukTerjual = "SELECT SUM(jumlah) AS total FROM detail_transaksi";
-$result2 = mysqli_query($conn, $queryProdukTerjual);
-$total_produk = mysqli_fetch_assoc($result2)['total'] ?? 0;
+$total_produk = mysqli_fetch_assoc(mysqli_query($conn, $queryProdukTerjual))['total'] ?? 0;
 
-// Hitung Total Pemasukan (pakai kolom 'total' yang sudah disediakan di tabel)
-$queryPemasukan = "SELECT SUM(total) AS total FROM detail_transaksi";
-$result3 = mysqli_query($conn, $queryPemasukan);
-$total_pemasukan = mysqli_fetch_assoc($result3)['total'] ?? 0;
+// Total Pemasukan Keseluruhan (dari tabel transaksi)
+$queryPemasukan = "SELECT SUM(total) AS total FROM transaksi";
+$total_pemasukan = mysqli_fetch_assoc(mysqli_query($conn, $queryPemasukan))['total'] ?? 0;
+
+// Total Pemasukan Hari Ini (filter berdasarkan tanggal)
+$queryHarian = "SELECT SUM(total) AS total FROM transaksi WHERE DATE(tgl_transaksi) = '$today'";
+$total_pemasukan_harian = mysqli_fetch_assoc(mysqli_query($conn, $queryHarian))['total'] ?? 0;
 ?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -63,7 +68,7 @@ $total_pemasukan = mysqli_fetch_assoc($result3)['total'] ?? 0;
         <h1 id="animated-text" class="text-3xl font-bold mb-4 text-gray-900 whitespace-nowrap">
             <span id="typed-text"></span><span class="cursor text-green-600">|</span>
         </h1> 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
             <div class="bg-white rounded-xl shadow-md p-4">
                 <p class="text-gray-600">Total Transaksi</p>
                 <p class="text-2xl font-bold text-green-600"><?= $total_transaksi ?></p>
@@ -73,7 +78,11 @@ $total_pemasukan = mysqli_fetch_assoc($result3)['total'] ?? 0;
                 <p class="text-2xl font-bold text-green-600"><?= $total_produk ?></p>
             </div>
             <div class="bg-white rounded-xl shadow-md p-4">
-                <p class="text-gray-600">Total Pemasukan</p>
+                <p class="text-gray-600">Pendapatan Hari Ini</p>
+                <p class="text-2xl font-bold text-green-600">Rp <?= number_format($total_pemasukan_harian, 0, ",", ".") ?></p>
+            </div>
+            <div class="bg-white rounded-xl shadow-md p-4">
+                <p class="text-gray-600">Seluruh Pendapatan Total</p>
                 <p class="text-2xl font-bold text-green-600">Rp <?= number_format($total_pemasukan, 0, ",", ".") ?></p>
             </div>
         </div>

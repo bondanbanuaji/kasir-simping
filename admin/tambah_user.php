@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body class="bg-gray-100 min-h-screen flex items-center justify-center px-4">
 
   <form method="POST" class="bg-white p-6 rounded shadow max-w-md w-full space-y-4">
-    <h1 class="text-2xl font-bold text-center">Tambah User</h1>
+    <h1 class="text-2xl font-bold text-center">Tambah Akun Baru</h1>
 
     <!-- Tampilkan pesan -->
     <?php if (isset($_SESSION['message'])): ?>

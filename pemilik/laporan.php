@@ -75,7 +75,6 @@ $result = mysqli_query($conn, $query);
                     <tr>
                         <th class="px-4 py-2 text-left">Invoice</th>
                         <th class="px-4 py-2 text-left">Tanggal</th>
-                        <th class="px-4 py-2 text-left">Jam</th>
                         <th class="px-4 py-2 text-left">Kasir</th>
                         <th class="px-4 py-2 text-left">Produk</th>
                         <th class="px-4 py-2 text-left">Metode</th>
@@ -93,7 +92,6 @@ $result = mysqli_query($conn, $query);
                             <tr class="border-b">
                                 <td class="px-4 py-2"><?= $row['no_invoice'] ?></td>
                                 <td class="px-4 py-2"><?= $tanggal ?></td>
-                                <td class="px-4 py-2"><?= $jam ?></td>
                                 <td class="px-4 py-2"><?= $row['nama_kasir'] ?></td>
                                 <td class="px-4 py-2"><?= $row['daftar_produk'] ?></td>
                                 <td class="px-4 py-2"><?= $row['metode_pembayaran'] ?></td>
